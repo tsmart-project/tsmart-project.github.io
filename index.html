@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Tsmart</title>
+
+    <link href="css/bootstrap.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <style>
+        .head-back {
+            padding: 30px;
+            color: #69c;
+            text-align: center;
+            background-color: #69c;
+        }
+
+        .nav-block {
+            background-color: inherit;
+            margin-left: 10%;
+            margin-right: 10%;
+            border-color: inherit;
+            text-align: end;
+        }
+
+        .nav-title:hover,
+        .nav-title:visited,
+        .nav-title:link,
+        .nav-title:active {
+            color: white;
+            font-size: 50px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .nav-item:visited,
+        .nav-item:link,
+        .nav-item:active {
+            font-size: 20px;
+            margin-top: 30px;
+        }
+        .nav-item:hover {
+            font-size: 20px;
+            margin-top: 30px;
+        }
+
+        .main-message-title {
+            font-size: 35px;
+            color: white;
+            text-shadow: -5px 5px 0 rgba(0,0,0,.1);
+            margin-bottom: 20px;
+        }
+
+        .main-message-outline{
+            font-size: 20px;
+            color: white;
+            font-weight: 200;
+            margin-bottom: 15px;
+        }
+        .main-message-detail{
+            font-size: 15px;
+            color: white;
+            font-weight: 200;
+        }
+
+        .modal-block {
+            padding-top: 15%
+        }
+
+        .modal-message{
+            padding-top: 45px;
+            font-size: 15px;
+        }
+
+        .main-block{
+            margin-left: 10%;
+            margin-right: 10%;
+        }
+    </style>
+</head>
+<body>
+<header class="head-back">
+    <nav class="navbar navbar-default nav-block" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="nav-title" href="#">Tsmart</a>
+            </div>
+            <div>
+                <ul class="nav navbar-nav navbar-right ">
+                    <li ><a href="#" class="nav-item " data-toggle="modal" data-target="#myModal">申请试用</a></li>
+                    <li ><a href="userManual/index.htm" class="nav-item" target="_blank">用户手册</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- 模态框（Modal） -->
+    <div class="modal fade modal-block" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <p class="modal-message">
+                        请邮件xxxx@xxx.com获取工具的试用版本。
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">确定
+                    </button>
+                </div>
+            </div>
+        </div><!-- /.modal -->
+    </div>
+    <div class="main-message">
+        <p class="main-message-title">
+            软 件 代 码 缺 陷 检 查 平 台
+        </p>
+        <p class="main-message-outline">
+            支持多种针对C程序代码合规性和安全缺陷的检查
+        </p>
+        <p class="main-message-detail">
+            在代码合规性方面，Tsmart现支持MISRA-C，GJB等多种编码规范
+        </p>
+        <p class="main-message-detail">
+            在安全缺陷方面，Tsmart支持对25类CWE缺陷进行检查
+        </p>
+    </div>
+</header>
+
+<!--评测数据-->
+<main>
+    <div class="main-block">
+        <h1>//评测数据</h1>
+    </div>
+</main>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="js/bootstrap.min.js"></script>
+</body>
+</html>

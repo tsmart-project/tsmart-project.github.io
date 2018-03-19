@@ -1,0 +1,1 @@
+﻿var gTopicTable = [[10,'IDH_Topic10','目录','topics/idh-topic10.htm'],[20,'IDH_Topic30','简介','topics/idh-topic30.htm'],[30,'IDH_Topic30_2','准备工作','topics/idh-topic30-2.htm'],[40,'IDH_Topic40','使用','topics/idh-topic40.htm'],[50,'IDH_Topic50','常见问题解答','topics/idh-topic50.htm'],[60,'IDH_Topic60','操作示例','topics/idh-topic60.htm']];
