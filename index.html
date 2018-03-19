@@ -45,7 +45,7 @@
         .nav-item:visited,
         .nav-item:link,
         .nav-item:active {
-            font-size: 20px;
+            font-size: 18px;
             margin-top: 30px;
         }
         .nav-item:hover {
@@ -54,7 +54,7 @@
         }
 
         .main-message-title {
-            font-size: 35px;
+            font-size: 45px;
             color: white;
             text-shadow: -5px 5px 0 rgba(0,0,0,.1);
             margin-bottom: 20px;
@@ -82,14 +82,25 @@
         }
 
         .main-block{
-            margin-left: 10%;
-            margin-right: 10%;
+            color: white;
+            text-align: center;
+            padding: 30px;
+        }
+
+        .scroll {
+            overflow: auto;
+            height: 100%;
+        }
+
+        .comment {
+            text-align: center;
+            font-size: 12px;
         }
     </style>
 </head>
 <body>
 <header class="head-back">
-    <nav class="navbar navbar-default nav-block" role="navigation">
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
         <div class="container-fluid">
             <div class="navbar-header">
                 <a class="nav-title" href="#">Tsmart</a>
@@ -108,7 +119,7 @@
             <div class="modal-content">
                 <div class="modal-body">
                     <p class="modal-message">
-                        请邮件xxxx@xxx.com获取工具的试用版本。
+                        请邮件<a style="color:mediumorchid" href="mailto:tsmart.project@gmail.com?subject=Demo%20Request">tsmart.project@gmail.com</a>获取工具的试用版本。
                     </p>
                 </div>
                 <div class="modal-footer">
@@ -118,27 +129,66 @@
             </div>
         </div><!-- /.modal -->
     </div>
-    <div class="main-message">
-        <p class="main-message-title">
-            软 件 代 码 缺 陷 检 查 平 台
-        </p>
-        <p class="main-message-outline">
-            支持多种针对C程序代码合规性和安全缺陷的检查
-        </p>
-        <p class="main-message-detail">
-            在代码合规性方面，Tsmart现支持MISRA-C，GJB等多种编码规范
-        </p>
-        <p class="main-message-detail">
-            在安全缺陷方面，Tsmart支持对25类CWE缺陷进行检查
-        </p>
-    </div>
 </header>
 
-<!--评测数据-->
-<main>
-    <div class="main-block">
-        <h1>//评测数据</h1>
+<main class="scroll">
+    <div class="main-block" style="background-color:rgb(85, 141, 198)">    
+        <div class="main-message">
+            <p class="main-message-title">
+                C源代码静态分析工具
+            </p>
+            <p class="main-message-outline">
+                支持整数溢出、缓冲区溢出、空指针引用等代码质量缺陷和安全漏洞
+            </p>
+            <p class="main-message-outline">
+                支持分析算法按需配置，灵活调节精度与效率的平衡
+            </p>
+            <p class="main-message-outline">
+                支持单文件、多文件以及多种编译环境
+            </p>
+            <p class="main-message-outline">
+                分析结果可定位、可跟踪、可管理
+            </p>
+            <p class="main-message-outline">
+                全面兼容CWE，缺陷的分类和展示严格遵循CWE兼容性规范
+            </p>
+        </div>
     </div>
+    <div class="main-block" style="background-color: rgb(55, 112, 168)">
+        <div class="main-message">
+            <p class="main-message-title">
+                精度和效率，缺一不可
+            </p>
+            <p class="main-message-outline">
+                在Juliet Test Suite上，总体误报率0.6%，漏报率0.6%<sup>1</sup>
+            </p>
+            <p class="main-message-outline">
+                在297万行代码的开源软件Wireshark上，总分析时间仅为1.4小时<sup>2</sup>
+            </p>
+            <br>
+            <div class="comment">
+                1. 实验基于Juliet Test Suite中25个CWE分类下的共14793个测试程序，机器配置为Intel Core i7-4970K，32GB内存，操作系统为Ubuntu 16.04LTS
+            </div>
+            <div class="comment">
+                2. 实验基于<a href="https://www.wireshark.org">Wireshark</a> 2.2.1，机器配置为Intel Xeon E5-2603v3，64GB内存，操作系统为Ubuntu 16.04LTS
+            </div>
+        </div>
+    </div>
+    <div class="main-block" style="background-color: rgb(49, 98, 147)">
+        <div class="main-message">
+            <p class="main-message-title">
+                获取试用版本
+            </p>
+            <p class="main-message-outline">
+                请<a style="color:palegreen" href="mailto:tsmart.project@gmail.com?subject=Demo%20Request">邮件</a>获取工具的试用版本
+            </p>
+        </div>
+        <br><br><br>
+        <div class="comment">
+            Copyright©2018 清华大学软件学院软件系统与工程研究所
+        </div>
+    </div>
+    
 </main>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
