@@ -138,7 +138,7 @@
                 C源代码静态分析工具
             </p>
             <p class="main-message-outline">
-                支持整数溢出、缓冲区溢出、空指针引用等代码质量缺陷和安全漏洞
+                支持整数溢出、缓冲区溢出、空指针引用等代码质量缺陷和安全漏洞<sup>1</sup>
             </p>
             <p class="main-message-outline">
                 支持分析算法按需配置，灵活调节精度与效率的平衡
@@ -153,6 +153,10 @@
                 全面兼容CWE，缺陷的分类和展示严格遵循CWE兼容性规范
             </p>
         </div>
+        <br>
+        <div class="comment">
+            1. Tsmart支持的缺陷类型详见<a href="userManual/index.htm">用户手册</a>
+        </div>
     </div>
     <div class="main-block" style="background-color: rgb(55, 112, 168)">
         <div class="main-message">
@@ -165,15 +169,15 @@
             <p class="main-message-outline">
                 在297万行代码的开源软件Wireshark上，总分析时间仅为1.4小时<sup>2</sup>
             </p>
-            <br>
+        </div>
+        <br>
             <div class="comment">
-                1. 实验基于Juliet Test Suite中25个CWE分类下的共14793个测试程序，机器配置为Intel Core i7-4970K，32GB内存，操作系统为Ubuntu 16.04LTS
+                2. 实验基于Juliet Test Suite中25个CWE分类下的共14793个测试程序，机器配置为Intel Core i7-4970K，32GB内存，操作系统为Ubuntu 16.04LTS
             </div>
             <div class="comment">
-                2. 实验基于<a href="https://www.wireshark.org">Wireshark</a> 2.2.1，机器配置为Intel Xeon E5-2603v3，64GB内存，操作系统为Ubuntu 16.04LTS
+                3. 实验基于<a href="https://www.wireshark.org">Wireshark</a> 2.2.1，机器配置为Intel Xeon E5-2603v3，64GB内存，操作系统为Ubuntu 16.04LTS
             </div>
         </div>
-    </div>
     <div class="main-block" style="background-color: rgb(49, 98, 147)">
         <div class="main-message">
             <p class="main-message-title">
