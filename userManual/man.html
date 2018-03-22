@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+        <style>
+/*--------------------------------------------------------------------------------------------- * Copyright (c) Microsoft Corporation. All rights reserved. * Licensed under the MIT License. See License.txt in the project root for license information. *--------------------------------------------------------------------------------------------*/ body { font-family: "Segoe WPC", "Segoe UI", "SFUIText-Light", "HelveticaNeue-Light", sans-serif, "Droid Sans Fallback"; font-size: 14px; padding: 0 12px; line-height: 22px; word-wrap: break-word; } body.scrollBeyondLastLine { margin-bottom: calc(100vh - 22px); } body.showEditorSelection .code-line { position: relative; } body.showEditorSelection .code-active-line:before, body.showEditorSelection .code-line:hover:before { content: ""; display: block; position: absolute; top: 0; left: -12px; height: 100%; } body.showEditorSelection li.code-active-line:before, body.showEditorSelection li.code-line:hover:before { left: -30px; } .vscode-light.showEditorSelection .code-active-line:before { border-left: 3px solid rgba(0, 0, 0, 0.15); } .vscode-light.showEditorSelection .code-line:hover:before { border-left: 3px solid rgba(0, 0, 0, 0.40); } .vscode-dark.showEditorSelection .code-active-line:before { border-left: 3px solid rgba(255, 255, 255, 0.4); } .vscode-dark.showEditorSelection .code-line:hover:before { border-left: 3px solid rgba(255, 255, 255, 0.60); } .vscode-high-contrast.showEditorSelection .code-active-line:before { border-left: 3px solid rgba(255, 160, 0, 0.7); } .vscode-high-contrast.showEditorSelection .code-line:hover:before { border-left: 3px solid rgba(255, 160, 0, 1); } img { max-width: 100%; max-height: 100%; } a { color: #4080D0; text-decoration: none; } a:focus, input:focus, select:focus, textarea:focus { outline: 1px solid -webkit-focus-ring-color; outline-offset: -1px; } hr { border: 0; height: 2px; border-bottom: 2px solid; } h1 { padding-bottom: 0.3em; line-height: 1.2; border-bottom-width: 1px; border-bottom-style: solid; } h1, h2, h3 { font-weight: normal; } h1 code, h2 code, h3 code, h4 code, h5 code, h6 code { font-size: inherit; line-height: auto; } a:hover { color: #4080D0; text-decoration: underline; } table { border-collapse: collapse; } table > thead > tr > th { text-align: left; border-bottom: 1px solid; } table > thead > tr > th, table > thead > tr > td, table > tbody > tr > th, table > tbody > tr > td { padding: 5px 10px; } table > tbody > tr + tr > td { border-top: 1px solid; } blockquote { margin: 0 7px 0 5px; padding: 0 16px 0 10px; border-left: 5px solid; } code { font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback"; font-size: 14px; line-height: 19px; } body.wordWrap pre { white-space: pre-wrap; } .mac code { font-size: 12px; line-height: 18px; } code > div { padding: 16px; border-radius: 3px; overflow: auto; } /** Theming */ .vscode-light { color: rgb(30, 30, 30); } .vscode-dark { color: #DDD; } .vscode-high-contrast { color: white; } .vscode-light code { color: #A31515; } .vscode-dark code { color: #D7BA7D; } .vscode-light code > div { background-color: rgba(220, 220, 220, 0.4); } .vscode-dark code > div { background-color: rgba(10, 10, 10, 0.4); } .vscode-high-contrast code > div { background-color: rgb(0, 0, 0); } .vscode-high-contrast h1 { border-color: rgb(0, 0, 0); } .vscode-light table > thead > tr > th { border-color: rgba(0, 0, 0, 0.69); } .vscode-dark table > thead > tr > th { border-color: rgba(255, 255, 255, 0.69); } .vscode-light h1, .vscode-light hr, .vscode-light table > tbody > tr + tr > td { border-color: rgba(0, 0, 0, 0.18); } .vscode-dark h1, .vscode-dark hr, .vscode-dark table > tbody > tr + tr > td { border-color: rgba(255, 255, 255, 0.18); } .vscode-light blockquote, .vscode-dark blockquote { background: rgba(127, 127, 127, 0.1); border-color: rgba(0, 122, 204, 0.5); } .vscode-high-contrast blockquote { background: transparent; border-color: #fff; }
+</style>
+<style>
+/* Tomorrow Theme */ /* http://jmblog.github.com/color-themes-for-google-code-highlightjs */ /* Original theme - https://github.com/chriskempson/tomorrow-theme */ /* Tomorrow Comment */ .hljs-comment, .hljs-quote { color: #8e908c; } /* Tomorrow Red */ .hljs-variable, .hljs-template-variable, .hljs-tag, .hljs-name, .hljs-selector-id, .hljs-selector-class, .hljs-regexp, .hljs-deletion { color: #c82829; } /* Tomorrow Orange */ .hljs-number, .hljs-built_in, .hljs-builtin-name, .hljs-literal, .hljs-type, .hljs-params, .hljs-meta, .hljs-link { color: #f5871f; } /* Tomorrow Yellow */ .hljs-attribute { color: #eab700; } /* Tomorrow Green */ .hljs-string, .hljs-symbol, .hljs-bullet, .hljs-addition { color: #718c00; } /* Tomorrow Blue */ .hljs-title, .hljs-section { color: #4271ae; } /* Tomorrow Purple */ .hljs-keyword, .hljs-selector-tag { color: #8959a8; } .hljs { display: block; overflow-x: auto; color: #4d4d4c; padding: 0.5em; } .hljs-emphasis { font-style: italic; } .hljs-strong { font-weight: bold; }
+</style>
+<style>
+ul.contains-task-list { padding-left: 0; } ul ul.contains-task-list { padding-left: 40px; } .task-list-item { list-style-type: none; } .task-list-item-checkbox { vertical-align: middle; }
+</style>
+        <style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', 'HelveticaNeue-Light', 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+    </head>
+    <body>
+        <ul>
+<li><a href="#%E7%AE%80%E4%BB%8B">简介</a>
+<ul>
+<li><a href="#%E4%BB%80%E4%B9%88%E6%98%AFtsmart">什么是Tsmart</a></li>
+<li><a href="#tsmart%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B">Tsmart的工作流程</a></li>
+<li><a href="#tsmart%E7%9B%B8%E5%85%B3%E6%9C%AF%E8%AF%AD">Tsmart相关术语</a></li>
+<li><a href="#tsmart%E7%9A%84%E6%80%A7%E8%83%BD%E6%8C%87%E6%A0%87">Tsmart的性能指标</a></li>
+</ul>
+</li>
+<li><a href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C">准备工作</a>
+<ul>
+<li><a href="#%E7%B3%BB%E7%BB%9F%E9%85%8D%E7%BD%AE">系统配置</a></li>
+<li><a href="#%E8%BF%90%E8%A1%8C%E6%97%B6%E4%BE%9D%E8%B5%96">运行时依赖</a></li>
+<li><a href="#%E8%BD%AF%E4%BB%B6%E8%8E%B7%E5%8F%96">软件获取</a></li>
+<li><a href="#%E7%BB%84%E7%BB%87%E7%BB%93%E6%9E%84">组织结构</a></li>
+</ul>
+</li>
+<li><a href="#%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8">工具使用</a>
+<ul>
+<li><a href="#%E5%AE%89%E8%A3%85%E6%96%B9%E6%B3%95">安装方法</a></li>
+<li><a href="#%E7%A8%8B%E5%BA%8F%E5%8F%82%E6%95%B0">程序参数</a></li>
+<li><a href="#%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95">使用方法</a>
+<ul>
+<li><a href="#%E5%8D%95%E6%96%87%E4%BB%B6%E6%A3%80%E6%B5%8B">单文件检测</a></li>
+<li><a href="#%E5%A4%8D%E5%90%88%E9%A1%B9%E7%9B%AE%E6%A3%80%E6%B5%8B">复合项目检测</a></li>
+<li><a href="#%E6%9F%A5%E7%9C%8B%E5%88%86%E6%9E%90%E7%BB%93%E6%9E%9C">查看分析结果</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E8%AF%A6%E8%A7%A3">配置文件详解</a>
+<ul>
+<li><a href="#%E9%A1%B6%E5%B1%82%E9%85%8D%E7%BD%AE">顶层配置</a></li>
+<li><a href="#%E9%98%B6%E6%AE%B5%E9%85%8D%E7%BD%AE">阶段配置</a></li>
+<li><a href="#%E5%88%86%E6%9E%90%E9%85%8D%E7%BD%AE">分析配置</a></li>
+</ul>
+</li>
+<li><a href="#%E6%93%8D%E4%BD%9C%E7%A4%BA%E4%BE%8B">操作示例</a></li>
+<li><a href="#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E8%A7%A3%E7%AD%94">常见问题解答</a></li>
+</ul>
+<h1 id="%E7%AE%80%E4%BB%8B">简介</h1>
+<h2 id="%E4%BB%80%E4%B9%88%E6%98%AFtsmart">什么是Tsmart</h2>
+<p>Tsmart是一个分析代码缺陷的静态分析工具，可以用于C语言编写的程序源代码进行检测分析，从而给出一个缺陷分析报告。</p>
+<p>静态分析是指在不运行代码的方式下，通过语法分析、词法分析、控制流、数据流分析等技术对程序代码进行扫描，从而验证程序代码是否满足规范性、安全性、可靠性、可维护性等指标的一种代码分析技术。</p>
+<p>软件项目的编写过程中，有时候代码虽然能够通过编译器的编译和小规模的测试，但是其中仍然可能存在一些隐患。通过程序分析，在这些隐患产生影响之前将其修复，是一个非常具有实际意义的工作。用户可以通过使用Tsmart对编写的源代码进行分析，并且根据反馈报告对源代码进行修改。如此反复的迭代，就可以逐步消除软件项目中源代码的潜在缺陷，从而提高代码的准确性和稳定性。</p>
+<p>下图给出了一个Tsmart的实际使用场景：</p>
+<p><img src="file:///d%3A/Research/Proj/tsmart_man/fig/tsmart_overall.png" alt="Tsmart_Overall"></p>
+<h2 id="tsmart%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B">Tsmart的工作流程</h2>
+<p>Tsmart主要提供了一个软件静态分析的入口。用户需要指定待检测的项目的路径，需要满足的编码规范（即需要检测缺陷类型），以及检测报告的输出路径。之后Tsmart工具会按照用户指定的参数，自动地对待检测项目进行分析检测，并且生成一份便于阅读的检测报告。</p>
+<p>根据实际需求的不同，Tsmart的功能可以大致分为以下3种：</p>
+<ol>
+<li>对于尚未执行编译抓取的C语言项目进行编译抓取，并且再对其编译抓取的结果进行分析检测；</li>
+<li>对于已经编译抓取的C语言项目进行分析检测；</li>
+<li>对于单个的C语言文件进行分析检测；</li>
+</ol>
+<h2 id="tsmart%E7%9B%B8%E5%85%B3%E6%9C%AF%E8%AF%AD">Tsmart相关术语</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>术语</th>
+<th>定义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>单文件检查</td>
+<td>Tsmart对C语言源代码文件检查方式的一种。对于单个独立的C文件进行检测，依据预设的参数要求观察其是否具有潜在的缺陷，并且将其汇报出来</td>
+</tr>
+<tr>
+<td>2</td>
+<td>编译抓取</td>
+<td>将<code>Makefile</code>的编译指令替换为相应的预处理指令，以得到预处理后的一个或多个对应与<code>Makefile</code>编译目标的分析任务</td>
+</tr>
+<tr>
+<td>3</td>
+<td>任务</td>
+<td>由一个或多个预处理后的源码文件组成的，对应于<code>Makefile</code>编译目标的分析对象</td>
+</tr>
+<tr>
+<td>4</td>
+<td>复合项目检查</td>
+<td>对基于<code>Makefile</code>编译环境的C程序进行检查</td>
+</tr>
+<tr>
+<td>5</td>
+<td>分析阶段</td>
+<td>与静态分析相关的不可分割的工作环节，常见的分析阶段包括程序解析、程序分析、结果处理等</td>
+</tr>
+<tr>
+<td>6</td>
+<td>CWE</td>
+<td>Common Weakness Enumeration（中文名：常见缺陷枚举）。一种国际范围内免费使用的一套统一的，可度量的软件缺陷描述体系。该体系内每一种缺陷都具有独立的编号和与之对应的名称和定义。以下也将该描述体系内的一种缺陷简称为CWE</td>
+</tr>
+<tr>
+<td>7</td>
+<td>数据流分析</td>
+<td>一种用于收集计算机程序在不同点的计算值的分析方法。采用程序的控制流图来确定对于变量的一次赋值可能传播到程序的哪些部分</td>
+</tr>
+<tr>
+<td>8</td>
+<td>抽象解释</td>
+<td>一种程序分析方法框架，基于有序集合（特别是格）上的单调函数，以及计算程序语义的可靠近似。它可以被看做是对计算机程序的抽象分析，并且能在不进行所有计算的前提下获取语义信息</td>
+</tr>
+<tr>
+<td>9</td>
+<td>反例</td>
+<td>对于某种缺陷而言，其反例就是该缺陷触发的一种具体场景。如当某一条具体的程序执行路径会触发该缺陷时，该执行路径就构成了一个反例</td>
+</tr>
+</tbody>
+</table>
+<h2 id="tsmart%E7%9A%84%E6%80%A7%E8%83%BD%E6%8C%87%E6%A0%87">Tsmart的性能指标</h2>
+<dl>
+<dt>缺陷检测精度</dt>
+<dd>Tsmart在<a href="https://samate.nist.gov/SRD/testsuite.php">Juliet Test Suite</a> 1.2的25个CWE分类上实现了总体漏报率0.6%，误报率0.6%</dd>
+<dt>缺陷检测效率</dt>
+<dd>Tsmart在配置为Intel(R) Xeon(R) E5-2603v3，64GB内存的服务器上能够在1.4小时内完成对<a href="https://www.wireshark.org/">Wireshark</a> 1.2.2的主编译目标的分析(包含约297万行有效C代码)</dd>
+<dt>支持缺陷类型</dt>
+<dd>Tsmart现支持25个CWE缺陷类型，总体上涵盖了数值运算缺陷、缓冲区溢出、指针缺陷、不可达代码等几大类程序缺陷。具体见下表</dd>
+</dl>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>内部名称</th>
+<th>CWE编号</th>
+<th>CWE类型</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><code>INTEGER_OVERFLOW</code></td>
+<td>190</td>
+<td>Integer Overflow or Wraparound</td>
+<td>整数运算的结果小于数学算术的期望值</td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>INTEGER_UNDERFLOW</code></td>
+<td>191</td>
+<td>Integer Underflow (Wrap or Wraparound)</td>
+<td>整数运算的结果大于数学算术的期望值</td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>UNEXPECTED_SIGN_EXT</code></td>
+<td>194</td>
+<td>Unexpected Sign Extension</td>
+<td>类型转换时整数的符号位被拓展导致转换结果与预期不一致</td>
+</tr>
+<tr>
+<td>4</td>
+<td><code>SIGNED_TO_UNSIGNED</code></td>
+<td>195</td>
+<td>Signed to Unsigned Conversion Error</td>
+<td>有符号整数转换到无符号整数产生非预期结果</td>
+</tr>
+<tr>
+<td>5</td>
+<td><code>UNSIGNED_TO_SIGNED</code></td>
+<td>196</td>
+<td>Unsigned to Signed Conversion Error</td>
+<td>无符号整数转换到有符号整数产生非预期结果</td>
+</tr>
+<tr>
+<td>6</td>
+<td><code>LOSSY_TRUNCATION</code></td>
+<td>197</td>
+<td>Numeric Truncation Error</td>
+<td>将整数值转换到较小的类型产生非预期的结果</td>
+</tr>
+<tr>
+<td>7</td>
+<td><code>DIV_ZERO</code></td>
+<td>369</td>
+<td>Divide By Zero</td>
+<td>除零错误</td>
+</tr>
+<tr>
+<td>8</td>
+<td><code>DEAD_CODE</code></td>
+<td>561</td>
+<td>Dead Code</td>
+<td>包含无法被执行到的代码</td>
+</tr>
+<tr>
+<td>9</td>
+<td><code>ALWAYS_TRUE</code></td>
+<td>571</td>
+<td>Expression is Always True</td>
+<td>表达式永真</td>
+</tr>
+<tr>
+<td>10</td>
+<td><code>ALWAYS_FALSE</code></td>
+<td>570</td>
+<td>Expression is Always False</td>
+<td>表达式永假</td>
+</tr>
+<tr>
+<td>11</td>
+<td><code>UNUSED_VARIABLE</code></td>
+<td>563</td>
+<td>Assignment to Variable without Use</td>
+<td>对变量赋值，但从未用到该值</td>
+</tr>
+<tr>
+<td>12 <td rowspan=4><code>INVALID_FREE</code></td>
+<td>590</td>
+<td>Free of Memory not on the Heap</td>
+<td>对非堆上的内存对象调用<code>free()</code></td>
+<td></td>
+</tr>
+<tr>
+<td>13</td>
+<td>415</td>
+<td>Double Free</td>
+<td>对同一内存对象调用两次<code>free()</code></td>
+<td></td>
+</tr>
+<tr>
+<td>14</td>
+<td>761</td>
+<td>Free of Pointer not at Start of Buffer</td>
+<td>对指向非堆内存对象0偏移量的指针调用<code>free()</code></td>
+<td></td>
+</tr>
+<tr>
+<td>15</td>
+<td>690</td>
+<td>Unchecked Return Value to NULL Pointer Dereference</td>
+<td>没有可能为<code>NULL</code>的函数调用结果进行检查</td>
+<td></td>
+</tr>
+<tr>
+<td>16 <td rowspan=4><code>INVALID_READ</code></td>
+<td>476</td>
+<td>NULL Pointer Dereference</td>
+<td>空指针引用</td>
+<td></td>
+</tr>
+<tr>
+<td>17</td>
+<td>126</td>
+<td>Buffer Over-read</td>
+<td>缓冲区读取位置超过缓冲区上界</td>
+<td></td>
+</tr>
+<tr>
+<td>18</td>
+<td>127</td>
+<td>Buffer Under-read</td>
+<td>缓冲区读取位置未达到缓冲区下界</td>
+<td></td>
+</tr>
+<tr>
+<td>19</td>
+<td>416</td>
+<td>Use After Free</td>
+<td>读取被释放的堆内存对象</td>
+<td></td>
+</tr>
+<tr>
+<td>20 <td rowspan=3><code>INVALID_WRITE</code></td>
+<td>121</td>
+<td>Stack-based Buffer Overflow</td>
+<td>对超出栈内存对象上界的位置写入数据</td>
+<td></td>
+</tr>
+<tr>
+<td>21</td>
+<td>122</td>
+<td>Heap-based Buffer Overflow</td>
+<td>对超出堆内存对象上界的位置写入数据</td>
+<td></td>
+</tr>
+<tr>
+<td>22</td>
+<td>124</td>
+<td>Buffer Underwrite ('Buffer Underflow')</td>
+<td>对未达到内存对象下界的位置写入数据</td>
+<td></td>
+</tr>
+<tr>
+<td>23 <td rowspan=2><code>MEMORY_LEAK</code></td>
+<td>401</td>
+<td>Improper Release of Memory Before Removing Last Reference ('Memory Leak')</td>
+<td>堆内存泄露</td>
+<td></td>
+</tr>
+<tr>
+<td>24</td>
+<td>775</td>
+<td>Missing Release of File Descriptor or Handle after Effective Lifetime</td>
+<td>文件对象泄露</td>
+<td></td>
+</tr>
+<tr>
+<td>25</td>
+<td><code>STACK_ADDRESS_RETURN</code></td>
+<td>562</td>
+<td>Return of Stack Variable Address</td>
+<td>函数返回栈内存对象的地址</td>
+</tr>
+</tbody>
+</table>
+<h1 id="%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C">准备工作</h1>
+<h2 id="%E7%B3%BB%E7%BB%9F%E9%85%8D%E7%BD%AE">系统配置</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>最低配置</th>
+<th>推荐配置</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>操作系统</td>
+<td>32位或64位Linux操作系统</td>
+<td>64位Ubuntu 16.04LTS或更高版本</td>
+</tr>
+<tr>
+<td>处理器</td>
+<td>3GHz Intel (R) Core2 Duo</td>
+<td>Intel Core i5(2.66GHz)或更优</td>
+</tr>
+<tr>
+<td>内存</td>
+<td>32位系统2GB，64位系统4GB</td>
+<td>8GB以上</td>
+</tr>
+<tr>
+<td>可用硬盘空间</td>
+<td>大于2GB</td>
+<td>大于2GB</td>
+</tr>
+</tbody>
+</table>
+<h2 id="%E8%BF%90%E8%A1%8C%E6%97%B6%E4%BE%9D%E8%B5%96">运行时依赖</h2>
+<table>
+<thead>
+<tr>
+<th>软件</th>
+<th>版本要求</th>
+<th>获取方式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Java</td>
+<td>8或更高</td>
+<td>http://openjdk.java.net/install/</td>
+</tr>
+<tr>
+<td>Python 2</td>
+<td>2.7或更高</td>
+<td>https://www.python.org/downloads/</td>
+</tr>
+<tr>
+<td>Requests</td>
+<td>2.8.14或更高</td>
+<td>从pip安装</td>
+</tr>
+<tr>
+<td>Python 3</td>
+<td>3.5或更高</td>
+<td>https://www.python.org/downloads/</td>
+</tr>
+<tr>
+<td>Apache Ant</td>
+<td>1.9或更高</td>
+<td>https://ant.apache.org/bindownload.cgi</td>
+</tr>
+<tr>
+<td>Z3</td>
+<td>4.5.0或更高</td>
+<td>https://github.com/Z3Prover/z3</td>
+</tr>
+</tbody>
+</table>
+<h2 id="%E8%BD%AF%E4%BB%B6%E8%8E%B7%E5%8F%96">软件获取</h2>
+<p>请邮件<a href="mailto:tsmart.project@gmail.com?subject=Demo%20Request">tsmart.project@gmail.com</a>获取Tsmart的试用版本</p>
+<h2 id="%E7%BB%84%E7%BB%87%E7%BB%93%E6%9E%84">组织结构</h2>
+<p>下表给出了Tsmart工程的组织结构。使用前请参考下表，以确认工具模块的完整性。</p>
+<table>
+<thead>
+<tr>
+<th>模块</th>
+<th>模块文件夹</th>
+<th>文件</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TsmartBD</td>
+<td><code>tsmart-v2/</code></td>
+<td><code>lib/</code></td>
+<td>保存了Tsmart在执行过程中所需要使用的各种外部依赖库</td>
+</tr>
+<tr>
+<td>TsmartBD</td>
+<td><code>tsmart-v2/</code></td>
+<td><code>config/</code></td>
+<td>保存了Tsmart的各类预设配置</td>
+</tr>
+<tr>
+<td>TsmartBD</td>
+<td><code>tsmart-v2/</code></td>
+<td><code>TsmartBuild.jar</code></td>
+<td>Tsmart编译抓取可执行文件</td>
+</tr>
+<tr>
+<td>TsmartBD</td>
+<td><code>tsmart-v2/</code></td>
+<td><code>TsmartAnalyze.jar</code></td>
+<td>Tsmart总体的可执行文件</td>
+</tr>
+<tr>
+<td>BuildCapture</td>
+<td><code>build_capture/</code></td>
+<td><code>BuildCaptureStart.py</code></td>
+<td>编译抓取执行入口</td>
+</tr>
+<tr>
+<td>BugVisualizer</td>
+<td><code>bug_visualizer/</code></td>
+<td><code>server.py</code></td>
+<td>Tsmart缺陷报告与管理的服务端</td>
+</tr>
+<tr>
+<td>BugVisualizer</td>
+<td><code>bug_visualizer/</code></td>
+<td><code>upload_sh.py</code></td>
+<td>向服务端上传待检测源代码和结果文件</td>
+</tr>
+<tr>
+<td>BugVisualizer</td>
+<td><code>bug_visualizer/</code></td>
+<td><code>bug_history/</code></td>
+<td>Tsmart的检测结果历史</td>
+</tr>
+<tr>
+<td>BugVisualizer</td>
+<td><code>bug_visualizer/</code></td>
+<td><code>visualizer.html</code></td>
+<td>BugVisualizer的网页模板</td>
+</tr>
+</tbody>
+</table>
+<h1 id="%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8">工具使用</h1>
+<h2 id="%E5%AE%89%E8%A3%85%E6%96%B9%E6%B3%95">安装方法</h2>
+<p>获取Tsmart工具的压缩包后解压即可。</p>
+<p>注意：为了防止不必要的编码错误产生，请确保解压路径中尽量不要出现非英文、中文、下划线字符。</p>
+<h2 id="%E7%A8%8B%E5%BA%8F%E5%8F%82%E6%95%B0">程序参数</h2>
+<p>Tsmart的总执行入口为<code>TsmartAnalyze.jar</code>，用户通过命令行指定Tsmart的工作模式、输入代码、输出路径等。参数的含义和使用方法如下表所示。</p>
+<table>
+<thead>
+<tr>
+<th>参数选项</th>
+<th>使用方法</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-build</code></td>
+<td><code>-build=[BUILD_PATH]</code></td>
+<td>对<code>[BUILD_PATH]</code>下的项目进行编译抓取</td>
+</tr>
+<tr>
+<td><code>-captured</code></td>
+<td><code>-captured=[CAPT_PATH]</code></td>
+<td>指定<code>[CAPT_PATH]</code>作为待分析的复合项目</td>
+</tr>
+<tr>
+<td><code>-manual</code></td>
+<td><code>-manual [SRC_PATH]</code></td>
+<td>指定<code>[SRC_PATH]</code>作为待分析的单个源文件</td>
+</tr>
+<tr>
+<td><code>-cwe</code></td>
+<td><code>-cwe=[CWE_LIST]</code></td>
+<td>指定待检查缺陷的CWE编号<code>[CWE_LIST]</code>，不与<code>-config</code>参数同时使用</td>
+</tr>
+<tr>
+<td><code>-task</code></td>
+<td><code>-task=[TASK_NO_LIST]</code></td>
+<td>指定输入复合项目中需要分析的任务编号<code>[TASK_NO_LIST]</code></td>
+</tr>
+<tr>
+<td><code>-taskName</code></td>
+<td><code>-taskName=[TASK_NAME_LIST]</code></td>
+<td>指定输入复合项目中需要分析的任务名称<code>[TASK_NAME_LIST]</code></td>
+</tr>
+<tr>
+<td><code>-output</code></td>
+<td><code>-output=[OUTPUT_PATH]</code></td>
+<td>指定<code>[OUTPUT_PATH]</code>为测试结果的输出路径</td>
+</tr>
+<tr>
+<td><code>-config</code></td>
+<td><code>-config=[CONFIG_PATH]</code></td>
+<td>指定<code>[CONFIG_PATH]</code>为配置文件，不与<code>-cwe</code>参数同时使用</td>
+</tr>
+<tr>
+<td><code>-list</code></td>
+<td><code>-list</code></td>
+<td>列举复合项目中所有待分析的任务</td>
+</tr>
+</tbody>
+</table>
+<h2 id="%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95">使用方法</h2>
+<h3 id="%E5%8D%95%E6%96%87%E4%BB%B6%E6%A3%80%E6%B5%8B">单文件检测</h3>
+<p>针对单个C文件进行缺陷检测。目标文件中可以包含外部头文件的引用，Tsmart在预处理时会将其自动展开。执行如下命令：</p>
+<pre class="hljs"><code><div>&gt; java -jar TsmartAnalyze.jar -manual [SRC_PATH] -cwe=[CWE_LIST] (-output=[OUTPUT_PATH])
+</div></code></pre>
+<p>其中<code>-manual</code>和<code>-cwe</code>都是必要参数，若没有<code>-output</code>参数则分析结果输出到默认路径即TsmartBD的<code>output\</code>子目录下。此外，用户可以在<code>-cwe</code>参数中指定多个缺陷分类，用逗号分隔，例如<code>-cwe=190,369</code>表示对输入源代码文件的整数溢出缺陷(CWE 190)和除零缺陷(CWE 369)进行检测。<code>-cwe</code>选项事实上用来指定Tsmart的分析配置文件，当用户需要对分析算法作进一步定制时，可以用<code>-config</code>参数指定配置文件。</p>
+<h3 id="%E5%A4%8D%E5%90%88%E9%A1%B9%E7%9B%AE%E6%A3%80%E6%B5%8B">复合项目检测</h3>
+<p>针对基于<code>Makefile</code>编译环境的C语言项目进行缺陷检测。如果待测项目还没有被预处理，则应先进行编译抓取。编译抓取的结果保存在原项目路径下的<code>.process_makefile/</code>文件夹下。带编译抓取流程的分析执行如下命令：</p>
+<pre class="hljs"><code><div>&gt; java -jar TsmartAnalyze.jar -build=[BUILD_PATH] make -cwe=[CWE_LIST] -task=[TASK_NO_LIST] (-output=[OUTPUT_PATH])
+</div></code></pre>
+<p>其中<code>-build=[BUILD_PATH] make</code>表示用<code>make</code>去处理<code>[BUILD_PATH]</code>所在项目的<code>Makefile</code>，是必须参数。<code>-task</code>参数是可选的，用户可以由此指定需要分析的任务编号，如果没有<code>-task</code>参数，那么默认地将分析编译抓取得到的所有分析任务。<code>-task</code>参数可以被<code>-taskName</code>参数替代，后者则需要指定待分析任务的名称（而非编号）。</p>
+<p>需要注意，若目标项目已经被编译抓取，那么重复进行编译抓取会导致错误。设目标项目的路径为<code>path/to/project</code>，那么通过以下命令可以清除编译抓取的副作用：</p>
+<pre class="hljs"><code><div>&gt; <span class="hljs-built_in">cd</span> path/to/project
+&gt; make clean
+&gt; rm -rf .process_makefile/
+</div></code></pre>
+<p>用户可以通过调用<code>TsmartBuild.jar</code>单独对项目进行编译抓取，设目标项目的路径为<code>path/to/project</code>，那么编译抓取需要执行如下命令：</p>
+<pre class="hljs"><code><div>&gt; <span class="hljs-built_in">cd</span> path/to/project
+&gt; ./configure
+&gt; java -jar TsmartBuild.jar -shell=/bin/bash make
+</div></code></pre>
+<p>执行如下命令对编译抓取后的项目进行检测：</p>
+<pre class="hljs"><code><div>&gt; java -jar TsmartAnalyze.jar -captured=[CAPT_PATH] -cwe=[CWE_LIST] -task=[TASK_NO_LIST] (-output=[OUTPUT_PATH])
+</div></code></pre>
+<p>其中<code>-captured</code>参数指定编译抓取后项目文件的路径，该路径应形如<code>path/to/project/.process_makefile/</code>。</p>
+<h3 id="%E6%9F%A5%E7%9C%8B%E5%88%86%E6%9E%90%E7%BB%93%E6%9E%9C">查看分析结果</h3>
+<p>为了查看分析结果，首先需要保证Tsmart缺陷报告与管理服务端已经正常部署并启动。之所以要将检测结果上传到服务端是因为开发团队可以共享检测结果以并行地对可能的缺陷进行排查。在服务器端进入<code>bug_visualizer</code>文件夹，执行以下命令：</p>
+<pre class="hljs"><code><div>python server.py ([port_number])
+</div></code></pre>
+<p>其中<code>port_number</code>为端口号，若不填则默认为<code>8080</code>。</p>
+<p>设服务器端的IP为<code>[server_ip]</code>，在运行静态缺陷检测的机器上执行以下命令将检测结果和源代码上传到服务端：</p>
+<pre class="hljs"><code><div>python3 upload_sh.py --name=[task_name] --build=[build_path] --captured=[capture_path] --manual=[src_list] --xml=[xml_file] --server=[server_ip] --port=[port_number]
+</div></code></pre>
+<p>其中<code>--name</code>参数为当前检测任务在服务端的名称，<code>--build</code>、<code>--captured</code>和<code>--manual</code>参数必需且三选一，与<code>TsmartAnalyze.jar</code>分析时所指定的相应参数一致，<code>--xml</code>参数指定分析结果文件的位置，默认为<code>tsmart-v2/output/result.xml</code>（若在<code>TsmartAnalyze.jar</code>中指定了<code>-output</code>参数，则需要在<code>[OUTPUT_PATH]</code>下去找<code>result.xml</code>文件），<code>--server</code>为服务端IP，<code>--port</code>为服务端的端口号。</p>
+<p>上传成功后，可以看到提示信息<code>上传成功</code>或<code>finished</code>。</p>
+<p>查看分析结果可以在网页浏览器中键入<code>http://[server_ip]:[port_number]/visualizer.html</code>打开检测结果展示页面，典型的界面如下图所示。
+<img src="file:///d%3A/Research/Proj/tsmart_man/fig/visualizer_numbered.png" alt="Bug Visualizer"></p>
+<ol>
+<li>在下拉菜单中选择要查看结果的检测任务</li>
+<li>文件浏览器，选择源代码文件</li>
+<li>代码查看器</li>
+<li>缺陷搜索框，可以键入CWE编号或者缺陷内部名称对列表中的缺陷进行筛选</li>
+<li>CWE编号，用鼠标单击可以在下面的面板(图中编号为7)中显示CWE详细信息</li>
+<li>缺陷列表，点选某个缺陷可以定位相应的源码文件并在反例路径面板(图中编号为8)中显示触发该缺陷的执行路径</li>
+<li>CWE详细信息，包含相应CWE编号的文字描述，并且包含链接指向官方的CWE缺陷页面</li>
+<li>反例路径面板，点击路径中具体的步骤后代码查看器的相应行会高亮并且光标会到达该行的首部位置</li>
+</ol>
+<h1 id="%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E8%AF%A6%E8%A7%A3">配置文件详解</h1>
+<p>Tsmart可以通过配置文件实现对分析算法细粒度的调节。总体来说，Tsmart的配置分为如下的3层：</p>
+<ol>
+<li><strong>顶层配置</strong>：指定分析阶段的调度方式，错误报告类型，库函数支持等</li>
+<li><strong>阶段配置</strong>：指定应使用哪些分析阶段，分析阶段应分别使用什么配置，以及分析阶段间的依赖关系</li>
+<li><strong>分析配置</strong>：具体分析算法的配置</li>
+</ol>
+<h2 id="%E9%A1%B6%E5%B1%82%E9%85%8D%E7%BD%AE">顶层配置</h2>
+<p>下面展示了一个示例的顶层配置文件：</p>
+<pre><code>phase.manager.config = top.range.config
+phase.manager.executionType = SEQUENTIAL
+
+statistics.kind = HIERARCHICAL
+error.export.mode = XML
+
+function.adapters = RangeFunctionAdapter
+function.RangeFunctionAdapter = map/alias.map
+function.stopFunctions = exit, abort, error, error_at_line
+</code></pre>
+<p>其中<code>phase.manager.config</code>指定了阶段配置文件；<code>phase.manager.executionType</code>指定了分析阶段的调度方式，这里<code>SEQUENTIAL</code>表明各分析阶段是串行执行的；<code>statistics.kind</code>通常设置为<code>HIERARCHICAL</code>适用于Tsmart可能选择多个函数作为分析入口的情形；<code>error.export.mode</code>务必设置为<code>XML</code>已正确地输出结果的<code>.xml</code>文件；<code>function.adapters</code>指定了需要加载的库函数支持模块，多个模块之间用逗号分隔；<code>function.RangeFunctionAdapter</code>则指定了库函数支持模块<code>RangeFunctionAdapter</code>对应的函数别名映射（如果函数<code>f1</code>和<code>f2</code>具有相同的语义，那么在库函数支持模块中实现<code>f1</code>的语义后在函数别名映射里将<code>f2</code>映射到<code>f1</code>即可）；<code>function.stopFunctions</code>指定了停用函数列表，程序的执行无法从停用函数中返回。</p>
+<h2 id="%E9%98%B6%E6%AE%B5%E9%85%8D%E7%BD%AE">阶段配置</h2>
+<p>下面展示一个示例的阶段配置文件：</p>
+<pre><code>.SET
+DIR = org.sosy_lab.cpachecker.core.phase;
+.TES
+
+.DEF cfa
+.TYPE = $(DIR).CFACreatePhase
+parser.dialect = GNUC
+analysis.functionPointerCalls = false
+analysis.aggressivelyRemoveGlobals = true
+analysis.summaryEdges = true
+analysis.machineModel = LINUX64
+.FED
+
+.DEF summary
+.TYPE = $(DIR).SummaryComputationPhase
+base = config/product/
+summaries = access.properties, range.properties
+summary.usedExternalSummary = ACCESS_SUMMARY, RANGE_SUMMARY
+summary.usedInternalSummary = ACCESS_LOOP_INTERNAL, RANGE_LOOP_INTERNAL
+.FED
+
+.DEF basic
+.TYPE = $(DIR).BasicAnalysisPhase
+phase.analysis.type = MULTI_ENTRY
+phase.me.analysis = rangeAnalysis.properties
+phase.me.stopAfterError = false
+checker.weaknessForCheck = INTEGER_OVERFLOW, INTEGER_CONVERSION, DIVIDED_BY_ZERO
+.FED
+
+.RUN
+summary : cfa;
+basic : summary;
+</code></pre>
+<p>可以看到整个阶段配置有3个部分：<code>.SET</code>块指定了别名<code>DIR</code>，用户还可以在此指定其它的别名（类似于<code>Makefile</code>的写法）；每个<code>.DEF</code>块对应于一个分析阶段，块内的配置都是针对相应分析阶段的配置；<code>.RUN</code>块则描述了分析阶段的依赖关系，其中<code>summary : cfa</code>表示<code>summary</code>阶段依赖于<code>cfa</code>阶段的结果。该阶段配置中共包含3个分析阶段：<code>cfa</code>（程序解析）、<code>summary</code>（摘要计算）以及<code>basic</code>（正式分析），每个分析阶段的<code>.TYPE</code>域是必须的，指定了当前分析阶段对应的类名。</p>
+<p>在程序解析部分，该配置通过<code>parser.dialect</code>指定了语法解析支持GNUC拓展，通过<code>analysis.functionPointerCalls</code>指定了构造控制流图时不对函数指针进行建模，通过<code>analysis.aggressivelyRemoveGlobals</code>裁剪从当前分析入口不可达的函数定义和局部声明，通过<code>analysis.machineModel</code>指定分析基于的数据模型为<code>LINUX64</code>（其中<code>int</code>、<code>long</code>和指针类型的长度分别为4、8、8字节）。</p>
+<p>在摘要计算部分，该配置首先指定摘要配置文件的根目录<code>base</code>，随后指定摘要配置文件的相对路径，以及需要使用的摘要算法名称。</p>
+<p>在正式分析部分，<code>phase.analysis.type</code>为当前分析任务的类型，其中<code>MULTI_ENTRY</code>指的是多分析入口分析算法，一般情况下都选择这种类型；<code>phase.me.analysis</code>指定了正式分析地具体分析算法配置文件，<code>phase.me.stopAfterError</code>表明当发现缺陷后是否立刻终止分析，默认选择<code>false</code>，若是将Tsmart用于程序验证中则可以选择<code>true</code>；<code>checker.weaknessForCheck</code>指定一个或多个需要检查的目标缺陷类型，可用的缺陷类型见<a href="#tsmart%E7%9A%84%E6%80%A7%E8%83%BD%E6%8C%87%E6%A0%87">Tsmart的性能指标</a>中的列表，需要指出目标缺陷是否会检查取决于<code>phase.me.analysis</code>指定的分析算法，若<code>rangeAnalysis.properties</code>不包含与指针或内存有关的分析算法，那么即便指定了<code>MEMORY_LEAK</code>也无法检测内存泄漏缺陷。</p>
+<h2 id="%E5%88%86%E6%9E%90%E9%85%8D%E7%BD%AE">分析配置</h2>
+<p>下面展示了具体分析配置<code>rangeAnalysis.properties</code>的内容：</p>
+<pre><code>analysis.algorithm.bounded = true
+analysis.reachedSet.hierarchical = true
+analysis.useConfidence = true
+
+analysis.me.static.strategy = CHEAP_COVER
+
+cpa = cpa.arg.ARGCPA
+ARGCPA.cpa = cpa.composite.CompositeCPA
+CompositeCPA.cpas = cpa.location.LocationCPA, cpa.boundary.BoundaryCPA, cpa.range.RangeCPA, cpa.pointer2.PointerCPA
+
+cpa.boundary.callDepth = 2
+cpa.boundary.loopIteration = 1
+cpa.boundary.loopDepth = 3
+
+analysis.traversal.controlled.maxWaitingSize = 16
+analysis.traversal.useDominationOrder = true
+trace.upperBound = 1000
+
+analysis.traversal.order = BFS
+
+cfa.useMultiEdges = false
+
+solver.solver = Z3
+</code></pre>
+<p>前2行的配置对于多分析入口分析是必需的。<code>analysis.useConfidence</code>是一个实验性功能，在分析中对检测出缺陷的置信度进行评分并以此筛选出置信度高的缺陷。<code>analysis.me.static.strategy</code>是入口选取策略，<code>CHEAP_COVER</code>是一种通过启发式算法自动选择分析入口的策略，其它可用的包括<code>MAIN</code>（主函数分析）、<code>FUNCTION_HEAD</code>（逐函数分析）等。再往下3行则是分析算法的配置，可以看到其中指定了<code>RangeCPA</code>用于值分析、<code>BoundaryCPA</code>用于对函数调用和循环迭代/嵌套数的统计、<code>PointerCPA</code>用于分析指针的指向信息。再往下3行是与限界分析相关的配置，其中<code>callDepth</code>、<code>loopIteration</code>和<code>loopDepth</code>分别指定最大过程间分析调用深度、最大循环展开次数和最大循环嵌套次数，超出阈值后则通过计算出的函数/循环摘要信息以跳过相应函数/循环的遍历分析。剩下的配置项用来对分析的精度和效率进行更加精细的调节，如<code>trace.upperBound</code>指定了分析过程中每个控制流分歧点下遍历的最大分支数。最后一行<code>solver.solver</code>指定分析中使用的约束求解器，此处指定<code>Z3</code>。</p>
+<h1 id="%E6%93%8D%E4%BD%9C%E7%A4%BA%E4%BE%8B">操作示例</h1>
+<h1 id="%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E8%A7%A3%E7%AD%94">常见问题解答</h1>
+<ol>
+<li><strong>为什么提示检测成功，也输出了报告，但是实际读取时发现报告存在各种问题？</strong></li>
+</ol>
+<ul>
+<li>如果执行了多次测试，并且这多次测试的输出路径是同一个路径，那么这些测试的输出结果会产生交汇，会对后续的测试结果产生污染。因此，如果要重复使用一个路径作为输出路径的话，请确保在每次测试开始之前已经清空该路径下的所有文件。</li>
+</ul>
+<ol start="2">
+<li><strong>为什么我找不到测试报告的输出路径？</strong></li>
+</ol>
+<ul>
+<li>输出报告的存放于用户指定的<code>[OUTPUT_PATH]</code>下，如果该参数没有被指定，那么默认的输出路径是TsmartBD模块目录下的<code>output/</code>中。</li>
+</ul>
+<ol start="3">
+<li><strong>为什么提示<code>Unrecognized CWE Number</code></strong></li>
+</ol>
+<ul>
+<li>目前Tsmart工具只实现了若干种CWE缺陷类型的检测。支持的缺陷类型的编号列表已在<a href="#tsmart%E7%9A%84%E6%80%A7%E8%83%BD%E6%8C%87%E6%A0%87">Tsmart的性能指标</a>中给出，请确保指定的CWE类型位于该列表之中。您可以邮件<a href="mailto:tsmart.project@gmail.com?subject=Demo%20Request">tsmart.project@gmail.com</a>请求希望新增支持的CWE编号。</li>
+</ul>
+
+    </body>
+    </html>
