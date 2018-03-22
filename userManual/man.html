@@ -66,7 +66,7 @@ ul.contains-task-list { padding-left: 0; } ul ul.contains-task-list { padding-le
 <p>静态分析是指在不运行代码的方式下，通过语法分析、词法分析、控制流、数据流分析等技术对程序代码进行扫描，从而验证程序代码是否满足规范性、安全性、可靠性、可维护性等指标的一种代码分析技术。</p>
 <p>软件项目的编写过程中，有时候代码虽然能够通过编译器的编译和小规模的测试，但是其中仍然可能存在一些隐患。通过程序分析，在这些隐患产生影响之前将其修复，是一个非常具有实际意义的工作。用户可以通过使用Tsmart对编写的源代码进行分析，并且根据反馈报告对源代码进行修改。如此反复的迭代，就可以逐步消除软件项目中源代码的潜在缺陷，从而提高代码的准确性和稳定性。</p>
 <p>下图给出了一个Tsmart的实际使用场景：</p>
-<p><img src="file:///d%3A/Research/Proj/tsmart_man/fig/tsmart_overall.png" alt="Tsmart_Overall"></p>
+<p><img src="fig/tsmart_overall.png" alt="Tsmart_Overall"></p>
 <h2 id="tsmart%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B">Tsmart的工作流程</h2>
 <p>Tsmart主要提供了一个软件静态分析的入口。用户需要指定待检测的项目的路径，需要满足的编码规范（即需要检测缺陷类型），以及检测报告的输出路径。之后Tsmart工具会按照用户指定的参数，自动地对待检测项目进行分析检测，并且生成一份便于阅读的检测报告。</p>
 <p>根据实际需求的不同，Tsmart的功能可以大致分为以下3种：</p>
@@ -572,7 +572,7 @@ ul.contains-task-list { padding-left: 0; } ul ul.contains-task-list { padding-le
 <p>其中<code>--name</code>参数为当前检测任务在服务端的名称，<code>--build</code>、<code>--captured</code>和<code>--manual</code>参数必需且三选一，与<code>TsmartAnalyze.jar</code>分析时所指定的相应参数一致，<code>--xml</code>参数指定分析结果文件的位置，默认为<code>tsmart-v2/output/result.xml</code>（若在<code>TsmartAnalyze.jar</code>中指定了<code>-output</code>参数，则需要在<code>[OUTPUT_PATH]</code>下去找<code>result.xml</code>文件），<code>--server</code>为服务端IP，<code>--port</code>为服务端的端口号。</p>
 <p>上传成功后，可以看到提示信息<code>上传成功</code>或<code>finished</code>。</p>
 <p>查看分析结果可以在网页浏览器中键入<code>http://[server_ip]:[port_number]/visualizer.html</code>打开检测结果展示页面，典型的界面如下图所示。
-<img src="file:///d%3A/Research/Proj/tsmart_man/fig/visualizer_numbered.png" alt="Bug Visualizer"></p>
+<img src="fig/visualizer_numbered.png" alt="Bug Visualizer"></p>
 <ol>
 <li>在下拉菜单中选择要查看结果的检测任务</li>
 <li>文件浏览器，选择源代码文件</li>
