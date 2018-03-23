@@ -27,6 +27,7 @@ ul.contains-task-list { padding-left: 0; } ul ul.contains-task-list { padding-le
 <li><a href="#tsmart%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B">Tsmart的工作流程</a></li>
 <li><a href="#tsmart%E7%9B%B8%E5%85%B3%E6%9C%AF%E8%AF%AD">Tsmart相关术语</a></li>
 <li><a href="#tsmart%E7%9A%84%E6%80%A7%E8%83%BD%E6%8C%87%E6%A0%87">Tsmart的性能指标</a></li>
+<li><a href="#cwe%E5%85%BC%E5%AE%B9%E6%80%A7">CWE兼容性</a></li>
 </ul>
 </li>
 <li><a href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C">准备工作</a>
@@ -57,7 +58,6 @@ ul.contains-task-list { padding-left: 0; } ul ul.contains-task-list { padding-le
 <li><a href="#%E5%88%86%E6%9E%90%E9%85%8D%E7%BD%AE">分析配置</a></li>
 </ul>
 </li>
-<li><a href="#%E6%93%8D%E4%BD%9C%E7%A4%BA%E4%BE%8B">操作示例</a></li>
 <li><a href="#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E8%A7%A3%E7%AD%94">常见问题解答</a></li>
 </ul>
 <h1 id="%E7%AE%80%E4%BB%8B">简介</h1>
@@ -139,7 +139,7 @@ ul.contains-task-list { padding-left: 0; } ul ul.contains-task-list { padding-le
 <dt>缺陷检测效率</dt>
 <dd>Tsmart在配置为Intel(R) Xeon(R) E5-2603v3，64GB内存的服务器上能够在1.4小时内完成对<a href="https://www.wireshark.org/">Wireshark</a> 1.2.2的主编译目标的分析(包含约297万行有效C代码)</dd>
 <dt>支持缺陷类型</dt>
-<dd>Tsmart现支持25个CWE缺陷类型，总体上涵盖了数值运算缺陷、缓冲区溢出、指针缺陷、不可达代码等几大类程序缺陷。具体见下表</dd>
+<dd>Tsmart现支持26个CWE缺陷类型，总体上涵盖了数值运算缺陷、缓冲区溢出、指针缺陷、内存泄漏、不可达代码等几大类程序缺陷。具体见下表</dd>
 </dl>
 <table>
 <thead>
@@ -230,7 +230,7 @@ ul.contains-task-list { padding-left: 0; } ul ul.contains-task-list { padding-le
 <td>对变量赋值，但从未用到该值</td>
 </tr>
 <tr>
-<td>12 <td rowspan=4><code>INVALID_FREE</code></td>
+<td>12 <td rowspan=5><code>INVALID_FREE</code></td>
 <td>590</td>
 <td>Free of Memory not on the Heap</td>
 <td>对非堆上的内存对象调用<code>free()</code></td>
@@ -258,74 +258,119 @@ ul.contains-task-list { padding-left: 0; } ul ul.contains-task-list { padding-le
 <td></td>
 </tr>
 <tr>
-<td>16 <td rowspan=4><code>INVALID_READ</code></td>
+<td>16</td>
+<td>404</td>
+<td>Improper Resource Shutdown or Release</td>
+<td>对资源对象的不正确释放</td>
+<td></td>
+</tr>
+<tr>
+<td>17 <td rowspan=4><code>INVALID_READ</code></td>
 <td>476</td>
 <td>NULL Pointer Dereference</td>
 <td>空指针引用</td>
 <td></td>
 </tr>
 <tr>
-<td>17</td>
+<td>18</td>
 <td>126</td>
 <td>Buffer Over-read</td>
 <td>缓冲区读取位置超过缓冲区上界</td>
 <td></td>
 </tr>
 <tr>
-<td>18</td>
+<td>19</td>
 <td>127</td>
 <td>Buffer Under-read</td>
 <td>缓冲区读取位置未达到缓冲区下界</td>
 <td></td>
 </tr>
 <tr>
-<td>19</td>
+<td>20</td>
 <td>416</td>
 <td>Use After Free</td>
 <td>读取被释放的堆内存对象</td>
 <td></td>
 </tr>
 <tr>
-<td>20 <td rowspan=3><code>INVALID_WRITE</code></td>
+<td>21 <td rowspan=3><code>INVALID_WRITE</code></td>
 <td>121</td>
 <td>Stack-based Buffer Overflow</td>
 <td>对超出栈内存对象上界的位置写入数据</td>
 <td></td>
 </tr>
 <tr>
-<td>21</td>
+<td>22</td>
 <td>122</td>
 <td>Heap-based Buffer Overflow</td>
 <td>对超出堆内存对象上界的位置写入数据</td>
 <td></td>
 </tr>
 <tr>
-<td>22</td>
+<td>23</td>
 <td>124</td>
 <td>Buffer Underwrite ('Buffer Underflow')</td>
 <td>对未达到内存对象下界的位置写入数据</td>
 <td></td>
 </tr>
 <tr>
-<td>23 <td rowspan=2><code>MEMORY_LEAK</code></td>
+<td>24 <td rowspan=2><code>MEMORY_LEAK</code></td>
 <td>401</td>
 <td>Improper Release of Memory Before Removing Last Reference ('Memory Leak')</td>
 <td>堆内存泄露</td>
 <td></td>
 </tr>
 <tr>
-<td>24</td>
+<td>25</td>
 <td>775</td>
 <td>Missing Release of File Descriptor or Handle after Effective Lifetime</td>
 <td>文件对象泄露</td>
 <td></td>
 </tr>
 <tr>
-<td>25</td>
+<td>26</td>
 <td><code>STACK_ADDRESS_RETURN</code></td>
 <td>562</td>
 <td>Return of Stack Variable Address</td>
 <td>函数返回栈内存对象的地址</td>
+</tr>
+</tbody>
+</table>
+<h2 id="cwe%E5%85%BC%E5%AE%B9%E6%80%A7">CWE兼容性</h2>
+<p>Tsmart是CWE兼容的（CWE-Compatible），下表展示了Tsmart工具是如何符合CWE兼容性要求的。</p>
+<table>
+<thead>
+<tr>
+<th>要求</th>
+<th>说明（英文）</th>
+<th>体现方式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CWE Searchable</td>
+<td>users may search security elements using CWE identifiers</td>
+<td>Tsmart的缺陷检测结果列表可以通过输入CWE编号进行检索和过滤（见<a href="#%E6%9F%A5%E7%9C%8B%E5%88%86%E6%9E%90%E7%BB%93%E6%9E%9C">查看分析结果</a>）</td>
+</tr>
+<tr>
+<td>CWE Output</td>
+<td>security elements presented to users includes, or allows users to obtain, associated CWE identifiers</td>
+<td>Tsmart的缺陷检测结果列表包含CWE编号栏目，显示了缺陷报告可能对应的CWE编号（见<a href="#%E6%9F%A5%E7%9C%8B%E5%88%86%E6%9E%90%E7%BB%93%E6%9E%9C">查看分析结果</a>）</td>
+</tr>
+<tr>
+<td>Mapping Accuracy</td>
+<td>security elements accurately link to the appropriate CWE identifiers</td>
+<td>本用户手册的<a href="#tsmart%E7%9A%84%E6%80%A7%E8%83%BD%E6%8C%87%E6%A0%87">Tsmart的性能指标</a>给出了Tsmart检测出的缺陷类型与CWE的对应关系</td>
+</tr>
+<tr>
+<td>CWE Documentation</td>
+<td>capability's documentation describes CWE, CWE compatibility, and how CWE-related functionality in the capability is used</td>
+<td>本用户手册<a href="#tsmart%E7%9B%B8%E5%85%B3%E6%9C%AF%E8%AF%AD">Tsmart相关术语</a>介绍了CWE，本节对CWE兼容性以及Tsmart的CWE兼容性情况进行了介绍</td>
+</tr>
+<tr>
+<td>CWE Coverage</td>
+<td>for CWE-Compatibility and CWE-Effectiveness, the capability's documentation explicitly lists the CWE-IDs that the capability claims coverage and effectiveness against locating in software</td>
+<td>本用户手册的<a href="#tsmart%E7%9A%84%E6%80%A7%E8%83%BD%E6%8C%87%E6%A0%87">Tsmart的性能指标</a>给出了Tsmart现支持的CWE编号</td>
 </tr>
 </tbody>
 </table>
@@ -669,7 +714,6 @@ cfa.useMultiEdges = false
 solver.solver = Z3
 </code></pre>
 <p>前2行的配置对于多分析入口分析是必需的。<code>analysis.useConfidence</code>是一个实验性功能，在分析中对检测出缺陷的置信度进行评分并以此筛选出置信度高的缺陷。<code>analysis.me.static.strategy</code>是入口选取策略，<code>CHEAP_COVER</code>是一种通过启发式算法自动选择分析入口的策略，其它可用的包括<code>MAIN</code>（主函数分析）、<code>FUNCTION_HEAD</code>（逐函数分析）等。再往下3行则是分析算法的配置，可以看到其中指定了<code>RangeCPA</code>用于值分析、<code>BoundaryCPA</code>用于对函数调用和循环迭代/嵌套数的统计、<code>PointerCPA</code>用于分析指针的指向信息。再往下3行是与限界分析相关的配置，其中<code>callDepth</code>、<code>loopIteration</code>和<code>loopDepth</code>分别指定最大过程间分析调用深度、最大循环展开次数和最大循环嵌套次数，超出阈值后则通过计算出的函数/循环摘要信息以跳过相应函数/循环的遍历分析。剩下的配置项用来对分析的精度和效率进行更加精细的调节，如<code>trace.upperBound</code>指定了分析过程中每个控制流分歧点下遍历的最大分支数。最后一行<code>solver.solver</code>指定分析中使用的约束求解器，此处指定<code>Z3</code>。</p>
-<h1 id="%E6%93%8D%E4%BD%9C%E7%A4%BA%E4%BE%8B">操作示例</h1>
 <h1 id="%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E8%A7%A3%E7%AD%94">常见问题解答</h1>
 <ol>
 <li><strong>为什么提示检测成功，也输出了报告，但是实际读取时发现报告存在各种问题？</strong></li>
