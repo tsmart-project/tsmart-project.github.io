@@ -44,7 +44,7 @@ ul.contains-task-list { padding-left: 0; } ul ul.contains-task-list { padding-le
 <li><a href="#%E7%A8%8B%E5%BA%8F%E5%8F%82%E6%95%B0">程序参数</a></li>
 <li><a href="#%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95">使用方法</a>
 <ul>
-<li><a href="#%E5%8D%95%E6%96%87%E4%BB%B6%E6%A3%80%E6%B5%8B">单文件检测</a></li>
+<li><a href="#%E7%AE%80%E5%8D%95%E6%A3%80%E6%B5%8B">简单检测</a></li>
 <li><a href="#%E5%A4%8D%E5%90%88%E9%A1%B9%E7%9B%AE%E6%A3%80%E6%B5%8B">复合项目检测</a></li>
 <li><a href="#%E6%9F%A5%E7%9C%8B%E5%88%86%E6%9E%90%E7%BB%93%E6%9E%9C">查看分析结果</a></li>
 </ul>
@@ -68,12 +68,12 @@ ul.contains-task-list { padding-left: 0; } ul ul.contains-task-list { padding-le
 <p>下图给出了一个Tsmart的实际使用场景：</p>
 <p><img src="fig/tsmart_overall.png" alt="Tsmart_Overall"></p>
 <h2 id="tsmart%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B">Tsmart的工作流程</h2>
-<p>Tsmart主要提供了一个软件静态分析的入口。用户需要指定待检测的项目的路径，需要满足的编码规范（即需要检测缺陷类型），以及检测报告的输出路径。之后Tsmart工具会按照用户指定的参数，自动地对待检测项目进行分析检测，并且生成一份便于阅读的检测报告。</p>
+<p>Tsmart主要提供了一个软件静态分析的入口。用户需要指定待检测的项目的路径，需要检测缺陷类型以及检测报告的输出路径。之后Tsmart工具会按照用户指定的参数，自动地对待检测项目进行分析检测，并且生成一份便于阅读的检测报告。</p>
 <p>根据实际需求的不同，Tsmart的功能可以大致分为以下3种：</p>
 <ol>
 <li>对于尚未执行编译抓取的C语言项目进行编译抓取，并且再对其编译抓取的结果进行分析检测；</li>
 <li>对于已经编译抓取的C语言项目进行分析检测；</li>
-<li>对于单个的C语言文件进行分析检测；</li>
+<li>对于若干C语言文件进行分析检测；</li>
 </ol>
 <h2 id="tsmart%E7%9B%B8%E5%85%B3%E6%9C%AF%E8%AF%AD">Tsmart相关术语</h2>
 <table>
@@ -87,8 +87,8 @@ ul.contains-task-list { padding-left: 0; } ul ul.contains-task-list { padding-le
 <tbody>
 <tr>
 <td>1</td>
-<td>单文件检查</td>
-<td>Tsmart对C语言源代码文件检查方式的一种。对于单个独立的C文件进行检测，依据预设的参数要求观察其是否具有潜在的缺陷，并且将其汇报出来</td>
+<td>简单检查</td>
+<td>Tsmart对C语言源代码文件检查方式的一种，对于若干C文件进行检测，依据预设的参数检查其是否具有潜在的缺陷</td>
 </tr>
 <tr>
 <td>2</td>
@@ -459,7 +459,7 @@ ul.contains-task-list { padding-left: 0; } ul ul.contains-task-list { padding-le
 <tr>
 <th>模块</th>
 <th>模块文件夹</th>
-<th>文件</th>
+<th>文件或文件夹</th>
 <th>作用</th>
 </tr>
 </thead>
@@ -487,12 +487,6 @@ ul.contains-task-list { padding-left: 0; } ul ul.contains-task-list { padding-le
 <td><code>tsmart-v2/</code></td>
 <td><code>TsmartAnalyze.jar</code></td>
 <td>Tsmart总体的可执行文件</td>
-</tr>
-<tr>
-<td>BuildCapture</td>
-<td><code>build_capture/</code></td>
-<td><code>BuildCaptureStart.py</code></td>
-<td>编译抓取执行入口</td>
 </tr>
 <tr>
 <td>BugVisualizer</td>
@@ -548,7 +542,7 @@ ul.contains-task-list { padding-left: 0; } ul ul.contains-task-list { padding-le
 <tr>
 <td><code>-manual</code></td>
 <td><code>-manual [SRC_PATH]</code></td>
-<td>指定<code>[SRC_PATH]</code>作为待分析的单个源文件</td>
+<td>指定<code>[SRC_PATH]</code>作为待分析的源文件</td>
 </tr>
 <tr>
 <td><code>-cwe</code></td>
@@ -580,14 +574,19 @@ ul.contains-task-list { padding-left: 0; } ul ul.contains-task-list { padding-le
 <td><code>-list</code></td>
 <td>列举复合项目中所有待分析的任务</td>
 </tr>
+<tr>
+<td><code>-version</code></td>
+<td><code>-version</code></td>
+<td>查看Tsmart的版本</td>
+</tr>
 </tbody>
 </table>
 <h2 id="%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95">使用方法</h2>
-<h3 id="%E5%8D%95%E6%96%87%E4%BB%B6%E6%A3%80%E6%B5%8B">单文件检测</h3>
-<p>针对单个C文件进行缺陷检测。目标文件中可以包含外部头文件的引用，Tsmart在预处理时会将其自动展开。执行如下命令：</p>
+<h3 id="%E7%AE%80%E5%8D%95%E6%A3%80%E6%B5%8B">简单检测</h3>
+<p>针对若干C文件进行缺陷检测。目标文件中可以包含外部头文件的引用，Tsmart在预处理时会将其自动展开。执行如下命令：</p>
 <pre class="hljs"><code><div>&gt; java -jar TsmartAnalyze.jar -manual [SRC_PATH] -cwe=[CWE_LIST] (-output=[OUTPUT_PATH])
 </div></code></pre>
-<p>其中<code>-manual</code>和<code>-cwe</code>都是必要参数，若没有<code>-output</code>参数则分析结果输出到默认路径即TsmartBD的<code>output\</code>子目录下。此外，用户可以在<code>-cwe</code>参数中指定多个缺陷分类，用逗号分隔，例如<code>-cwe=190,369</code>表示对输入源代码文件的整数溢出缺陷(CWE 190)和除零缺陷(CWE 369)进行检测。<code>-cwe</code>选项事实上用来指定Tsmart的分析配置文件，当用户需要对分析算法作进一步定制时，可以用<code>-config</code>参数指定配置文件。</p>
+<p>其中<code>-manual</code>是必要参数，若没有<code>-output</code>参数则分析结果输出到默认路径即TsmartBD的<code>output\</code>子目录下。此外，用户可以在<code>-cwe</code>参数中指定多个缺陷分类，用逗号分隔，例如<code>-cwe=190,369</code>表示对输入源代码文件的整数溢出缺陷(CWE 190)和除零缺陷(CWE 369)进行检测。<code>-cwe</code>选项事实上用来指定Tsmart的分析配置文件，当用户需要对分析算法作进一步定制时，可以用<code>-config</code>参数指定配置文件。</p>
 <h3 id="%E5%A4%8D%E5%90%88%E9%A1%B9%E7%9B%AE%E6%A3%80%E6%B5%8B">复合项目检测</h3>
 <p>针对基于<code>Makefile</code>编译环境的C语言项目进行缺陷检测。如果待测项目还没有被预处理，则应先进行编译抓取。编译抓取的结果保存在原项目路径下的<code>.process_makefile/</code>文件夹下。带编译抓取流程的分析执行如下命令：</p>
 <pre class="hljs"><code><div>&gt; java -jar TsmartAnalyze.jar -build=[BUILD_PATH] make -cwe=[CWE_LIST] -task=[TASK_NO_LIST] (-output=[OUTPUT_PATH])
@@ -625,7 +624,7 @@ ul.contains-task-list { padding-left: 0; } ul ul.contains-task-list { padding-le
 <li>代码查看器</li>
 <li>缺陷搜索框，可以键入CWE编号或者缺陷内部名称对列表中的缺陷进行筛选</li>
 <li>CWE编号，用鼠标单击可以在下面的面板(图中编号为7)中显示CWE详细信息</li>
-<li>缺陷列表，点选某个缺陷可以定位相应的源码文件并在反例路径面板(图中编号为8)中显示触发该缺陷的执行路径</li>
+<li>缺陷列表，点选某个缺陷可在反例路径面板(图中编号为8)中显示触发该缺陷的执行路径</li>
 <li>CWE详细信息，包含相应CWE编号的文字描述，并且包含链接指向官方的CWE缺陷页面</li>
 <li>反例路径面板，点击路径中具体的步骤后代码查看器的相应行会高亮并且光标会到达该行的首部位置</li>
 </ol>
@@ -648,7 +647,7 @@ function.adapters = RangeFunctionAdapter
 function.RangeFunctionAdapter = map/alias.map
 function.stopFunctions = exit, abort, error, error_at_line
 </code></pre>
-<p>其中<code>phase.manager.config</code>指定了阶段配置文件；<code>phase.manager.executionType</code>指定了分析阶段的调度方式，这里<code>SEQUENTIAL</code>表明各分析阶段是串行执行的；<code>statistics.kind</code>通常设置为<code>HIERARCHICAL</code>适用于Tsmart可能选择多个函数作为分析入口的情形；<code>error.export.mode</code>务必设置为<code>XML</code>已正确地输出结果的<code>.xml</code>文件；<code>function.adapters</code>指定了需要加载的库函数支持模块，多个模块之间用逗号分隔；<code>function.RangeFunctionAdapter</code>则指定了库函数支持模块<code>RangeFunctionAdapter</code>对应的函数别名映射（如果函数<code>f1</code>和<code>f2</code>具有相同的语义，那么在库函数支持模块中实现<code>f1</code>的语义后在函数别名映射里将<code>f2</code>映射到<code>f1</code>即可）；<code>function.stopFunctions</code>指定了停用函数列表，程序的执行无法从停用函数中返回。</p>
+<p>其中<code>phase.manager.config</code>指定了阶段配置文件；<code>phase.manager.executionType</code>指定了分析阶段的调度方式，这里<code>SEQUENTIAL</code>表明各分析阶段是串行执行的；<code>statistics.kind</code>通常设置为<code>HIERARCHICAL</code>适用于Tsmart可能选择多个函数作为分析入口的情形；<code>error.export.mode</code>务必设置为<code>XML</code>以正确地输出结果的<code>.xml</code>文件；<code>function.adapters</code>指定了需要加载的库函数支持模块，多个模块之间用逗号分隔；<code>function.RangeFunctionAdapter</code>则指定了库函数支持模块<code>RangeFunctionAdapter</code>对应的函数别名映射（如果函数<code>f1</code>和<code>f2</code>具有相同的语义，那么在库函数支持模块中实现<code>f1</code>的语义后在函数别名映射里将<code>f2</code>映射到<code>f1</code>即可）；<code>function.stopFunctions</code>指定了停用函数列表，程序的执行无法从停用函数中返回。</p>
 <h2 id="%E9%98%B6%E6%AE%B5%E9%85%8D%E7%BD%AE">阶段配置</h2>
 <p>下面展示一个示例的阶段配置文件：</p>
 <pre><code>.SET
@@ -684,7 +683,7 @@ checker.weaknessForCheck = INTEGER_OVERFLOW, INTEGER_CONVERSION, DIVIDED_BY_ZERO
 summary : cfa;
 basic : summary;
 </code></pre>
-<p>可以看到整个阶段配置有3个部分：<code>.SET</code>块指定了别名<code>DIR</code>，用户还可以在此指定其它的别名（类似于<code>Makefile</code>的写法）；每个<code>.DEF</code>块对应于一个分析阶段，块内的配置都是针对相应分析阶段的配置；<code>.RUN</code>块则描述了分析阶段的依赖关系，其中<code>summary : cfa</code>表示<code>summary</code>阶段依赖于<code>cfa</code>阶段的结果。该阶段配置中共包含3个分析阶段：<code>cfa</code>（程序解析）、<code>summary</code>（摘要计算）以及<code>basic</code>（正式分析），每个分析阶段的<code>.TYPE</code>域是必须的，指定了当前分析阶段对应的类名。</p>
+<p>可以看到整个阶段配置有3个部分：<code>.SET</code>块指定了别名<code>DIR</code>，用户还可以在此指定其它的别名（类似于<code>Makefile</code>的写法）；每个<code>.DEF</code>块对应于一个分析阶段，块内的配置都是针对相应分析阶段的配置，并且指定当前分析阶段名称的域<code>.TYPE</code>是必需的；<code>.RUN</code>块则描述了分析阶段的依赖关系，其中<code>summary : cfa</code>表示<code>summary</code>阶段依赖于<code>cfa</code>阶段的结果。该阶段配置中共包含3个分析阶段：<code>cfa</code>（程序解析）、<code>summary</code>（摘要计算）以及<code>basic</code>（正式分析）。</p>
 <p>在程序解析部分，该配置通过<code>parser.dialect</code>指定了语法解析支持GNUC拓展，通过<code>analysis.functionPointerCalls</code>指定了构造控制流图时不对函数指针进行建模，通过<code>analysis.aggressivelyRemoveGlobals</code>裁剪从当前分析入口不可达的函数定义和局部声明，通过<code>analysis.machineModel</code>指定分析基于的数据模型为<code>LINUX64</code>（其中<code>int</code>、<code>long</code>和指针类型的长度分别为4、8、8字节）。</p>
 <p>在摘要计算部分，该配置首先指定摘要配置文件的根目录<code>base</code>，随后指定摘要配置文件的相对路径，以及需要使用的摘要算法名称。</p>
 <p>在正式分析部分，<code>phase.analysis.type</code>为当前分析任务的类型，其中<code>MULTI_ENTRY</code>指的是多分析入口分析算法，一般情况下都选择这种类型；<code>phase.me.analysis</code>指定了正式分析地具体分析算法配置文件，<code>phase.me.stopAfterError</code>表明当发现缺陷后是否立刻终止分析，默认选择<code>false</code>，若是将Tsmart用于程序验证中则可以选择<code>true</code>；<code>checker.weaknessForCheck</code>指定一个或多个需要检查的目标缺陷类型，可用的缺陷类型见<a href="#tsmart%E7%9A%84%E6%80%A7%E8%83%BD%E6%8C%87%E6%A0%87">Tsmart的性能指标</a>中的列表，需要指出目标缺陷是否会检查取决于<code>phase.me.analysis</code>指定的分析算法，若<code>rangeAnalysis.properties</code>不包含与指针或内存有关的分析算法，那么即便指定了<code>MEMORY_LEAK</code>也无法检测内存泄漏缺陷。</p>
@@ -715,6 +714,7 @@ cfa.useMultiEdges = false
 solver.solver = Z3
 </code></pre>
 <p>前2行的配置对于多分析入口分析是必需的。<code>analysis.useConfidence</code>是一个实验性功能，在分析中对检测出缺陷的置信度进行评分并以此筛选出置信度高的缺陷。<code>analysis.me.static.strategy</code>是入口选取策略，<code>CHEAP_COVER</code>是一种通过启发式算法自动选择分析入口的策略，其它可用的包括<code>MAIN</code>（主函数分析）、<code>FUNCTION_HEAD</code>（逐函数分析）等。再往下3行则是分析算法的配置，可以看到其中指定了<code>RangeCPA</code>用于值分析、<code>BoundaryCPA</code>用于对函数调用和循环迭代/嵌套数的统计、<code>PointerCPA</code>用于分析指针的指向信息。再往下3行是与限界分析相关的配置，其中<code>callDepth</code>、<code>loopIteration</code>和<code>loopDepth</code>分别指定最大过程间分析调用深度、最大循环展开次数和最大循环嵌套次数，超出阈值后则通过计算出的函数/循环摘要信息以跳过相应函数/循环的遍历分析。剩下的配置项用来对分析的精度和效率进行更加精细的调节，如<code>trace.upperBound</code>指定了分析过程中每个控制流分歧点下遍历的最大分支数。最后一行<code>solver.solver</code>指定分析中使用的约束求解器，此处指定<code>Z3</code>。</p>
+<p>其它更多的关于配置文件中配置项的信息请参阅TsmartBD根目录下的<code>doc/ConfigurationOptions.txt</code>文件。</p>
 <h1 id="%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E8%A7%A3%E7%AD%94">常见问题解答</h1>
 <ol>
 <li><strong>为什么提示检测成功，也输出了报告，但是实际读取时发现报告存在各种问题？</strong></li>

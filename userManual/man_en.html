@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+        <style>
+/*--------------------------------------------------------------------------------------------- * Copyright (c) Microsoft Corporation. All rights reserved. * Licensed under the MIT License. See License.txt in the project root for license information. *--------------------------------------------------------------------------------------------*/ body { font-family: "Segoe WPC", "Segoe UI", "SFUIText-Light", "HelveticaNeue-Light", sans-serif, "Droid Sans Fallback"; font-size: 14px; padding: 0 12px; line-height: 22px; word-wrap: break-word; } body.scrollBeyondLastLine { margin-bottom: calc(100vh - 22px); } body.showEditorSelection .code-line { position: relative; } body.showEditorSelection .code-active-line:before, body.showEditorSelection .code-line:hover:before { content: ""; display: block; position: absolute; top: 0; left: -12px; height: 100%; } body.showEditorSelection li.code-active-line:before, body.showEditorSelection li.code-line:hover:before { left: -30px; } .vscode-light.showEditorSelection .code-active-line:before { border-left: 3px solid rgba(0, 0, 0, 0.15); } .vscode-light.showEditorSelection .code-line:hover:before { border-left: 3px solid rgba(0, 0, 0, 0.40); } .vscode-dark.showEditorSelection .code-active-line:before { border-left: 3px solid rgba(255, 255, 255, 0.4); } .vscode-dark.showEditorSelection .code-line:hover:before { border-left: 3px solid rgba(255, 255, 255, 0.60); } .vscode-high-contrast.showEditorSelection .code-active-line:before { border-left: 3px solid rgba(255, 160, 0, 0.7); } .vscode-high-contrast.showEditorSelection .code-line:hover:before { border-left: 3px solid rgba(255, 160, 0, 1); } img { max-width: 100%; max-height: 100%; } a { color: #4080D0; text-decoration: none; } a:focus, input:focus, select:focus, textarea:focus { outline: 1px solid -webkit-focus-ring-color; outline-offset: -1px; } hr { border: 0; height: 2px; border-bottom: 2px solid; } h1 { padding-bottom: 0.3em; line-height: 1.2; border-bottom-width: 1px; border-bottom-style: solid; } h1, h2, h3 { font-weight: normal; } h1 code, h2 code, h3 code, h4 code, h5 code, h6 code { font-size: inherit; line-height: auto; } a:hover { color: #4080D0; text-decoration: underline; } table { border-collapse: collapse; } table > thead > tr > th { text-align: left; border-bottom: 1px solid; } table > thead > tr > th, table > thead > tr > td, table > tbody > tr > th, table > tbody > tr > td { padding: 5px 10px; } table > tbody > tr + tr > td { border-top: 1px solid; } blockquote { margin: 0 7px 0 5px; padding: 0 16px 0 10px; border-left: 5px solid; } code { font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback"; font-size: 14px; line-height: 19px; } body.wordWrap pre { white-space: pre-wrap; } .mac code { font-size: 12px; line-height: 18px; } code > div { padding: 16px; border-radius: 3px; overflow: auto; } /** Theming */ .vscode-light { color: rgb(30, 30, 30); } .vscode-dark { color: #DDD; } .vscode-high-contrast { color: white; } .vscode-light code { color: #A31515; } .vscode-dark code { color: #D7BA7D; } .vscode-light code > div { background-color: rgba(220, 220, 220, 0.4); } .vscode-dark code > div { background-color: rgba(10, 10, 10, 0.4); } .vscode-high-contrast code > div { background-color: rgb(0, 0, 0); } .vscode-high-contrast h1 { border-color: rgb(0, 0, 0); } .vscode-light table > thead > tr > th { border-color: rgba(0, 0, 0, 0.69); } .vscode-dark table > thead > tr > th { border-color: rgba(255, 255, 255, 0.69); } .vscode-light h1, .vscode-light hr, .vscode-light table > tbody > tr + tr > td { border-color: rgba(0, 0, 0, 0.18); } .vscode-dark h1, .vscode-dark hr, .vscode-dark table > tbody > tr + tr > td { border-color: rgba(255, 255, 255, 0.18); } .vscode-light blockquote, .vscode-dark blockquote { background: rgba(127, 127, 127, 0.1); border-color: rgba(0, 122, 204, 0.5); } .vscode-high-contrast blockquote { background: transparent; border-color: #fff; }
+</style>
+<style>
+/* Tomorrow Theme */ /* http://jmblog.github.com/color-themes-for-google-code-highlightjs */ /* Original theme - https://github.com/chriskempson/tomorrow-theme */ /* Tomorrow Comment */ .hljs-comment, .hljs-quote { color: #8e908c; } /* Tomorrow Red */ .hljs-variable, .hljs-template-variable, .hljs-tag, .hljs-name, .hljs-selector-id, .hljs-selector-class, .hljs-regexp, .hljs-deletion { color: #c82829; } /* Tomorrow Orange */ .hljs-number, .hljs-built_in, .hljs-builtin-name, .hljs-literal, .hljs-type, .hljs-params, .hljs-meta, .hljs-link { color: #f5871f; } /* Tomorrow Yellow */ .hljs-attribute { color: #eab700; } /* Tomorrow Green */ .hljs-string, .hljs-symbol, .hljs-bullet, .hljs-addition { color: #718c00; } /* Tomorrow Blue */ .hljs-title, .hljs-section { color: #4271ae; } /* Tomorrow Purple */ .hljs-keyword, .hljs-selector-tag { color: #8959a8; } .hljs { display: block; overflow-x: auto; color: #4d4d4c; padding: 0.5em; } .hljs-emphasis { font-style: italic; } .hljs-strong { font-weight: bold; }
+</style>
+<style>
+ul.contains-task-list { padding-left: 0; } ul ul.contains-task-list { padding-left: 40px; } .task-list-item { list-style-type: none; } .task-list-item-checkbox { vertical-align: middle; }
+</style>
+        <style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', 'HelveticaNeue-Light', 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+    </head>
+    <body>
+        <ul>
+<li><a href="#introduction">Introduction</a>
+<ul>
+<li><a href="#whats-tsmart">What's Tsmart</a></li>
+<li><a href="#the-workflow-of-tsmart">The Workflow of Tsmart</a></li>
+<li><a href="#terms">Terms</a></li>
+<li><a href="#the-capability-of-tsmart">The Capability of Tsmart</a></li>
+<li><a href="#cwe-compatibility">CWE Compatibility</a></li>
+</ul>
+</li>
+<li><a href="#preparation">Preparation</a>
+<ul>
+<li><a href="#system-requirements">System Requirements</a></li>
+<li><a href="#runtime-dependencies">Runtime Dependencies</a></li>
+<li><a href="#availability">Availability</a></li>
+<li><a href="#components">Components</a></li>
+</ul>
+</li>
+<li><a href="#usage">Usage</a>
+<ul>
+<li><a href="#installation">Installation</a></li>
+<li><a href="#command-line-overview">Command Line Overview</a></li>
+<li><a href="#usage-details">Usage Details</a>
+<ul>
+<li><a href="#simple-check">Simple Check</a></li>
+<li><a href="#compound-check">Compound Check</a></li>
+<li><a href="#review-of-analysis-results">Review of Analysis Results</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#guide-for-configuration">Guide for Configuration</a>
+<ul>
+<li><a href="#top-configuration">Top Configuration</a></li>
+<li><a href="#phase-configuration">Phase Configuration</a></li>
+<li><a href="#analysis-configuration">Analysis Configuration</a></li>
+</ul>
+</li>
+<li><a href="#faq">FAQ</a></li>
+</ul>
+<h1 id="introduction">Introduction</h1>
+<h2 id="whats-tsmart">What's Tsmart</h2>
+<p>Tsmart is a static analyzer for C source code. Given a C program, Tsmart outputs a report which contains a list of potential defects and how they could be triggered in program execution.</p>
+<p>Static analysis offers static compile-time techniques for predicting safe and computable approximations to the set of values or behaviors arising dynamically at runtime when executing a program. The main applications of static analysis include allowing compilers to generate more optimized code and reducing the likelihood of malicious or unintended behavior of programs.</p>
+<p>It is almost impossible to write a bug-free program. Although developers employ tests to validate the program functionality, there could still be a substantial number of potential defects which could only be manifested by corner inputs. Tsmart can be utilized to improve the quality of source code in the terms of reliability and security by finding bugs that reside deeply inside programs</p>
+<p>The overall schematic overview of Tsmart is shown as follows.</p>
+<p><img src="fig/tsmart_overall_en.png" alt="Tsmart_Overall"></p>
+<h2 id="the-workflow-of-tsmart">The Workflow of Tsmart</h2>
+<p>To use Tsmart for static analysis, users should specify the program files to be analyzed, the types of defects to be checked, and the output location of analysis results. Tsmart analyzes the input source files fully automatically and then generates a report on potential bugs with the information including bug locations and execution paths for detected bugs.</p>
+<p>Tsmart has 3 main working modes:</p>
+<ol>
+<li>Build and preprocess (i.e. Build-capture) a C project and then perform static analysis;</li>
+<li>Perform static analysis on a build-captured C project;</li>
+<li>Perform static analysis for a collection of source files.</li>
+</ol>
+<h2 id="terms">Terms</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Term</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Simple Check</td>
+<td>Tsmart's working mode on which a collection of source files is checked against the specified types of defects.</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Build-capture</td>
+<td>Build-capture replaces compilation commands in <code>Makefile</code> with the corresponding preprocessing commands and produces one or more analysis tasks, each of which consists of preprocessed source files and corresponds to a target in <code>Makefile</code>.</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Analysis Task</td>
+<td>An analysis task is a module that consists of one or more preprocessed source files and corresponds to a target in <code>Makefile</code>.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Compound Check</td>
+<td>Tsmart's working mode on which a C project is checked against the specified types of defects.</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Phase</td>
+<td>A phase is an indivisible step in static analysis. Common phases include program parsing, semantics analysis and results processing.</td>
+</tr>
+<tr>
+<td>6</td>
+<td>CWE</td>
+<td>The Common Weakness Enumeration (CWE) is a category system for software weaknesses and vulnerabilities. It is sustained by a community project with the goals of understanding flaws in software and creating automated tools that can be used to identify, fix, and prevent those flaws. The project is sponsored by the National Cybersecurity FFRDC, which is owned by The MITRE Corporation, with support from US-CERT and the National Cyber Security Division of the U.S. Department of Homeland Security. The official homepage of CWE is https://cwe.mitre.org</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Data-flow Analysis</td>
+<td>Data-flow analysis is a technique for gathering information about the possible set of values calculated at various points in a computer program.</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Abstract Interpretation</td>
+<td>Abstract interpretation is a theory of sound approximation of the semantics of computer programs, based on monotonic functions over ordered sets, especially lattices. It can be viewed as a partial execution of a computer program which gains information about its semantics.</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Counterexample</td>
+<td>In term of program analysis, a counterexample is a concrete execution that triggers a certain defect.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="the-capability-of-tsmart">The Capability of Tsmart</h2>
+<dl>
+<dt>Effectiveness</dt>
+<dd>Tsmart achieves 0.6% false-positive rate and 0.6% false-negative rate on 25 CWE categories in <a href="https://samate.nist.gov/SRD/testsuite.php">Juliet Test Suite</a> 1.2.</dd>
+<dt>Scalability</dt>
+<dd>Tsmart finishes a completed analysis on <a href="https://www.wireshark.org/">Wireshark</a> 1.2.2 (~2.97MLOC) within 1.4 hours. The underlying hardware platform is a server with Intel(R) Xeon(R) E5-2603v3 CPU and 64GB memory.</dd>
+<dt>Supported Defects</dt>
+<dd>Tsmart currently supports 26 CWEs which generally cover the most fundamental and important program defects such as integer overflow, buffer overflow, null pointer dereference, resource leak and unreachable code. Details are listed as follows.</dd>
+</dl>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Internal Name</th>
+<th>CWE</th>
+<th>CWE Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><code>INTEGER_OVERFLOW</code></td>
+<td>190</td>
+<td>Integer Overflow or Wraparound</td>
+<td>The software performs a calculation that can produce an integer overflow or wraparound, when the logic assumes that the resulting value will always be larger than the original value. This can introduce other weaknesses when the calculation is used for resource management or execution control.</td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>INTEGER_UNDERFLOW</code></td>
+<td>191</td>
+<td>Integer Underflow (Wrap or Wraparound)</td>
+<td>The product subtracts one value from another, such that the result is less than the minimum allowable integer value, which produces a value that is not equal to the correct result.</td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>UNEXPECTED_SIGN_EXT</code></td>
+<td>194</td>
+<td>Unexpected Sign Extension</td>
+<td>The software performs an operation on a number that causes it to be sign extended when it is transformed into a larger data type. When the original number is negative, this can produce unexpected values that lead to resultant weaknesses.</td>
+</tr>
+<tr>
+<td>4</td>
+<td><code>SIGNED_TO_UNSIGNED</code></td>
+<td>195</td>
+<td>Signed to Unsigned Conversion Error</td>
+<td>The software uses a signed primitive and performs a cast to an unsigned primitive, which can produce an unexpected value if the value of the signed primitive can not be represented using an unsigned primitive.</td>
+</tr>
+<tr>
+<td>5</td>
+<td><code>UNSIGNED_TO_SIGNED</code></td>
+<td>196</td>
+<td>Unsigned to Signed Conversion Error</td>
+<td>The software uses an unsigned primitive and performs a cast to a signed primitive, which can produce an unexpected value if the value of the unsigned primitive can not be represented using a signed primitive.</td>
+</tr>
+<tr>
+<td>6</td>
+<td><code>LOSSY_TRUNCATION</code></td>
+<td>197</td>
+<td>Numeric Truncation Error</td>
+<td>Truncation errors occur when a primitive is cast to a primitive of a smaller size and data is lost in the conversion.</td>
+</tr>
+<tr>
+<td>7</td>
+<td><code>DIV_ZERO</code></td>
+<td>369</td>
+<td>Divide By Zero</td>
+<td>The product divides a value by zero.</td>
+</tr>
+<tr>
+<td>8</td>
+<td><code>DEAD_CODE</code></td>
+<td>561</td>
+<td>Dead Code</td>
+<td>The software contains dead code, which can never be executed.</td>
+</tr>
+<tr>
+<td>9</td>
+<td><code>ALWAYS_TRUE</code></td>
+<td>571</td>
+<td>Expression is Always True</td>
+<td>The software contains an expression that will always evaluate to true.</td>
+</tr>
+<tr>
+<td>10</td>
+<td><code>ALWAYS_FALSE</code></td>
+<td>570</td>
+<td>Expression is Always False</td>
+<td>The software contains an expression that will always evaluate to false.</td>
+</tr>
+<tr>
+<td>11</td>
+<td><code>UNUSED_VARIABLE</code></td>
+<td>563</td>
+<td>Assignment to Variable without Use</td>
+<td>The variable's value is assigned but never used, making it a dead store.</td>
+</tr>
+<tr>
+<td>12 <td rowspan=5><code>INVALID_FREE</code></td>
+<td>590</td>
+<td>Free of Memory not on the Heap</td>
+<td>The application calls <code>free()</code> on a pointer to memory that was not allocated using associated heap allocation functions such as <code>malloc()</code>, <code>calloc()</code>, or <code>realloc()</code>.</td>
+<td></td>
+</tr>
+<tr>
+<td>13</td>
+<td>415</td>
+<td>Double Free</td>
+<td>The product calls <code>free()</code> twice on the same memory address, potentially leading to modification of unexpected memory locations.</td>
+<td></td>
+</tr>
+<tr>
+<td>14</td>
+<td>761</td>
+<td>Free of Pointer not at Start of Buffer</td>
+<td>The application calls <code>free()</code> on a pointer to a memory resource that was allocated on the heap, but the pointer is not at the start of the buffer.</td>
+<td></td>
+</tr>
+<tr>
+<td>15</td>
+<td>690</td>
+<td>Unchecked Return Value to NULL Pointer Dereference</td>
+<td>The product does not check for an error after calling a function that can return with a NULL pointer if the function fails, which leads to a resultant NULL pointer dereference.</td>
+<td></td>
+</tr>
+<tr>
+<td>16</td>
+<td>404</td>
+<td>Improper Resource Shutdown or Release</td>
+<td>The program does not release or incorrectly releases a resource before it is made available for re-use.</td>
+<td></td>
+</tr>
+<tr>
+<td>17 <td rowspan=4><code>INVALID_READ</code></td>
+<td>476</td>
+<td>NULL Pointer Dereference</td>
+<td>A NULL pointer dereference occurs when the application dereferences a pointer that it expects to be valid, but is NULL, typically causing a crash or exit.</td>
+<td></td>
+</tr>
+<tr>
+<td>18</td>
+<td>126</td>
+<td>Buffer Over-read</td>
+<td>The software reads from a buffer using buffer access mechanisms such as indexes or pointers that reference memory locations after the targeted buffer.</td>
+<td></td>
+</tr>
+<tr>
+<td>19</td>
+<td>127</td>
+<td>Buffer Under-read</td>
+<td>The software reads from a buffer using buffer access mechanisms such as indexes or pointers that reference memory locations prior to the targeted buffer.</td>
+<td></td>
+</tr>
+<tr>
+<td>20</td>
+<td>416</td>
+<td>Use After Free</td>
+<td>Referencing memory after it has been freed can cause a program to crash, use unexpected values, or execute code.</td>
+<td></td>
+</tr>
+<tr>
+<td>21 <td rowspan=3><code>INVALID_WRITE</code></td>
+<td>121</td>
+<td>Stack-based Buffer Overflow</td>
+<td>A stack-based buffer overflow condition is a condition where the buffer being overwritten is allocated on the stack (i.e., is a local variable or, rarely, a parameter to a function).</td>
+<td></td>
+</tr>
+<tr>
+<td>22</td>
+<td>122</td>
+<td>Heap-based Buffer Overflow</td>
+<td>A heap overflow condition is a buffer overflow, where the buffer that can be overwritten is allocated in the heap portion of memory, generally meaning that the buffer was allocated using a routine such as <code>malloc()</code>.</td>
+<td></td>
+</tr>
+<tr>
+<td>23</td>
+<td>124</td>
+<td>Buffer Underwrite ('Buffer Underflow')</td>
+<td>The software writes to a buffer using an index or pointer that references a memory location prior to the beginning of the buffer.</td>
+<td></td>
+</tr>
+<tr>
+<td>24 <td rowspan=2><code>MEMORY_LEAK</code></td>
+<td>401</td>
+<td>Improper Release of Memory Before Removing Last Reference ('Memory Leak')</td>
+<td>The software does not sufficiently track and release allocated memory after it has been used, which slowly consumes remaining memory.</td>
+<td></td>
+</tr>
+<tr>
+<td>25</td>
+<td>775</td>
+<td>Missing Release of File Descriptor or Handle after Effective Lifetime</td>
+<td>The software does not release a file descriptor or handle after its effective lifetime has ended, i.e., after the file descriptor/handle is no longer needed.</td>
+<td></td>
+</tr>
+<tr>
+<td>26</td>
+<td><code>STACK_ADDRESS_RETURN</code></td>
+<td>562</td>
+<td>Return of Stack Variable Address</td>
+<td>A function returns the address of a stack variable, which will cause unintended program behavior, typically in the form of a crash.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="cwe-compatibility">CWE Compatibility</h2>
+<p>Tsmart is CWE-compatible, and the details are demonstrated in the following table.</p>
+<table>
+<thead>
+<tr>
+<th>Requirement</th>
+<th>Description</th>
+<th>Implementation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CWE Searchable</td>
+<td>users may search security elements using CWE identifiers</td>
+<td>Bug report can be filtered by CWE identifiers (ref. <a href="#review-of-analysis-results">Review of Analysis Results</a>)</td>
+</tr>
+<tr>
+<td>CWE Output</td>
+<td>security elements presented to users includes, or allows users to obtain, associated CWE identifiers</td>
+<td>Each defect entry in bug report has a <code>CWE</code> field which records the possibly corresponding CWE identifiers (ref. <a href="#review-of-analysis-results">Review of Analysis Results</a>)</td>
+</tr>
+<tr>
+<td>Mapping Accuracy</td>
+<td>security elements accurately link to the appropriate CWE identifiers</td>
+<td><a href="#the-capability-of-tsmart">The Capability of Tsmart</a> gives the relation from defect types in Tsmart to CWE identifiers</td>
+</tr>
+<tr>
+<td>CWE Documentation</td>
+<td>capability's documentation describes CWE, CWE compatibility, and how CWE-related functionality in the capability is used</td>
+<td><a href="#terms">Terms</a> introduces CWE. This section introduces CWE-compatibility and how CWE-related functionality is used in Tsmart.</td>
+</tr>
+<tr>
+<td>CWE Coverage</td>
+<td>for CWE-Compatibility and CWE-Effectiveness, the capability's documentation explicitly lists the CWE-IDs that the capability claims coverage and effectiveness against locating in software</td>
+<td><a href="#the-capability-of-tsmart">The Capability of Tsmart</a> gives the supported CWE identifiers by Tsmart.</td>
+</tr>
+</tbody>
+</table>
+<p>For more information on CWE-compatibility, please visit https://cwe.mitre.org/compatible/index.html</p>
+<h1 id="preparation">Preparation</h1>
+<h2 id="system-requirements">System Requirements</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Minimum</th>
+<th>Recommended</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Operating System</td>
+<td>32-bit/64-bit Linux</td>
+<td>64-bit Ubuntu 16.04LTS or newer</td>
+</tr>
+<tr>
+<td>CPU</td>
+<td>3GHz Intel (R) Core2 Duo</td>
+<td>Intel Core i5(2.66GHz) or better</td>
+</tr>
+<tr>
+<td>Memory</td>
+<td>2GB for 32-bit system, 4GB for 64-bit system</td>
+<td>more than 8GB</td>
+</tr>
+<tr>
+<td>Disk Space</td>
+<td>more than 2GB</td>
+<td>more than 2GB</td>
+</tr>
+</tbody>
+</table>
+<h2 id="runtime-dependencies">Runtime Dependencies</h2>
+<table>
+<thead>
+<tr>
+<th>Software</th>
+<th>Version</th>
+<th>Availability</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Java</td>
+<td>8 or higher</td>
+<td>http://openjdk.java.net/install/</td>
+</tr>
+<tr>
+<td>Python 2</td>
+<td>2.7 or higher</td>
+<td>https://www.python.org/downloads/</td>
+</tr>
+<tr>
+<td>Requests</td>
+<td>2.8.14 or higher</td>
+<td>install via pip</td>
+</tr>
+<tr>
+<td>Python 3</td>
+<td>3.5 or higher</td>
+<td>https://www.python.org/downloads/</td>
+</tr>
+<tr>
+<td>Apache Ant</td>
+<td>1.9 or higher</td>
+<td>https://ant.apache.org/bindownload.cgi</td>
+</tr>
+<tr>
+<td>Z3</td>
+<td>4.5.0 or higher</td>
+<td>https://github.com/Z3Prover/z3</td>
+</tr>
+</tbody>
+</table>
+<h2 id="availability">Availability</h2>
+<p>Please mail to <a href="mailto:tsmart.project@gmail.com?subject=Demo%20Request">tsmart.project@gmail.com</a> for a demo version of Tsmart.</p>
+<h2 id="components">Components</h2>
+<p>The components of Tsmart are listed as follows.</p>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Directory</th>
+<th>File or Folder</th>
+<th>Functionality</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TsmartBD</td>
+<td><code>tsmart-v2/</code></td>
+<td><code>lib/</code></td>
+<td>Dependencies for Tsmart</td>
+</tr>
+<tr>
+<td>TsmartBD</td>
+<td><code>tsmart-v2/</code></td>
+<td><code>config/</code></td>
+<td>Preset configurations for Tsmart</td>
+</tr>
+<tr>
+<td>TsmartBD</td>
+<td><code>tsmart-v2/</code></td>
+<td><code>TsmartBuild.jar</code></td>
+<td>Build-capture executable</td>
+</tr>
+<tr>
+<td>TsmartBD</td>
+<td><code>tsmart-v2/</code></td>
+<td><code>TsmartAnalyze.jar</code></td>
+<td>The main entry of Tsmart</td>
+</tr>
+<tr>
+<td>BugVisualizer</td>
+<td><code>bug_visualizer/</code></td>
+<td><code>server.py</code></td>
+<td>The server for management of analysis results</td>
+</tr>
+<tr>
+<td>BugVisualizer</td>
+<td><code>bug_visualizer/</code></td>
+<td><code>upload_sh.py</code></td>
+<td>Upload the analysis results and relevant source code to the server</td>
+</tr>
+<tr>
+<td>BugVisualizer</td>
+<td><code>bug_visualizer/</code></td>
+<td><code>bug_history/</code></td>
+<td>The history of analysis results</td>
+</tr>
+<tr>
+<td>BugVisualizer</td>
+<td><code>bug_visualizer/</code></td>
+<td><code>visualizer.html</code></td>
+<td>Webpage template for BugVisualizer</td>
+</tr>
+</tbody>
+</table>
+<h1 id="usage">Usage</h1>
+<h2 id="installation">Installation</h2>
+<p>Extract the compression archive of Tsmart to somewhere. The target path should only contain A-Z, a-z, 0-9 or _ to avoid unpredictable issues.</p>
+<h2 id="command-line-overview">Command Line Overview</h2>
+<p>The main entry of Tsmart is <code>TsmartAnalyze.jar</code>. Users can specify the working mode, the input source code and the output location of analysis results via command line arguments. The supported arguments are listed as follows.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Usage</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-build</code></td>
+<td><code>-build=[BUILD_PATH]</code></td>
+<td>Perform build-capture for the project under <code>[BUILD_PATH]</code></td>
+</tr>
+<tr>
+<td><code>-captured</code></td>
+<td><code>-captured=[CAPT_PATH]</code></td>
+<td>Specify the build-captured project under <code>[CAPT_PATH]</code> for static analysis</td>
+</tr>
+<tr>
+<td><code>-manual</code></td>
+<td><code>-manual [SRC_PATH]</code></td>
+<td>Specify a collection of source files (<code>[SRC_PATH]</code> is the list of source paths) for static analysis</td>
+</tr>
+<tr>
+<td><code>-cwe</code></td>
+<td><code>-cwe=[CWE_LIST]</code></td>
+<td>Specify the target defects via CWE identifiers <code>[CWE_LIST]</code> (Note: SHOULD NOT use <code>-config</code> when <code>-cwe</code> is used)</td>
+</tr>
+<tr>
+<td><code>-task</code></td>
+<td><code>-task=[TASK_NO_LIST]</code></td>
+<td>Specify the tasks to be analyzed by task numbers in <code>[TASK_NO_LIST]</code></td>
+</tr>
+<tr>
+<td><code>-taskName</code></td>
+<td><code>-taskName=[TASK_NAME_LIST]</code></td>
+<td>Specify the tasks to be analyzed by task names in <code>[TASK_NAME_LIST]</code></td>
+</tr>
+<tr>
+<td><code>-output</code></td>
+<td><code>-output=[OUTPUT_PATH]</code></td>
+<td>Specify <code>[OUTPUT_PATH]</code> as the location of output analysis results</td>
+</tr>
+<tr>
+<td><code>-config</code></td>
+<td><code>-config=[CONFIG_PATH]</code></td>
+<td>Specify <code>[CONFIG_PATH]</code> as the configuration (Note: SHOULD NOT use <code>-config</code> when <code>-cwe</code> is used)</td>
+</tr>
+<tr>
+<td><code>-list</code></td>
+<td><code>-list</code></td>
+<td>Enumerate available analysis tasks for a compound check</td>
+</tr>
+<tr>
+<td><code>-version</code></td>
+<td><code>-version</code></td>
+<td>View the version of Tsmart</td>
+</tr>
+</tbody>
+</table>
+<h2 id="usage-details">Usage Details</h2>
+<h3 id="simple-check">Simple Check</h3>
+<p>Perform static analysis on a collection of source files. The input source files could contain header files which are processed by preprocessor in Tsmart. The command for simple check is as follows.</p>
+<pre class="hljs"><code><div>&gt; java -jar TsmartAnalyze.jar -manual [SRC_PATH] -cwe=[CWE_LIST] (-output=[OUTPUT_PATH])
+</div></code></pre>
+<p><code>-manual</code> is required while <code>-output</code> is optional. If <code>-output</code> is not specified, the results are output to <code>output\</code> under the root location of TsmartBD module. Furthermore, users can specify multiple CWE identifiers split by commas in the <code>-cwe</code> argument. For example, <code>-cwe=190,369</code> makes Tsmart to check the defects of CWE 190 (integer overflow) and CWE 369 (division-by-zero). In fact, <code>-cwe</code> argument specifies preset configurations associated with CWE identifiers. If it is necessary to tweak analysis algorithm in a more fine-grained manner, users can specify a configuration file via <code>-config</code> argument.</p>
+<h3 id="compound-check">Compound Check</h3>
+<p>Perform static analysis on a C project based on <code>Makefile</code> compilation system. If the input C project has not been preprocessed, build-capture is necessary in prior to analysis. The output of build-capture is stored under <code>.process_makefile/</code> in the root directory of the input project. The command for compound check with build-capture is as follows.</p>
+<pre class="hljs"><code><div>&gt; java -jar TsmartAnalyze.jar -build=[BUILD_PATH] make -cwe=[CWE_LIST] -task=[TASK_NO_LIST] (-output=[OUTPUT_PATH])
+</div></code></pre>
+<p>The required argument <code>-build=[BUILD_PATH] make</code> denotes that using <code>make</code> to handle the <code>Makefile</code> in the project under <code>[BUILD_PATH]</code>. The <code>-task</code> argument is to specify the analysis task(s) to be analyzed and is optional. If the <code>-task</code> argument is absent, all the analysis tasks in the build-captured project are to be analyzed. Furthermore, the <code>-task</code> argument can be replaced with the <code>-taskName</code> argument which specifies the names of analysis tasks to be analyzed.</p>
+<p>Note that, performing build-capture on a build-captured project would arise runtime errors. Let <code>path/to/project</code> be the path of the input project, then the following commands restore a build-captured project to its original status.</p>
+<pre class="hljs"><code><div>&gt; <span class="hljs-built_in">cd</span> path/to/project
+&gt; make clean
+&gt; rm -rf .process_makefile/
+</div></code></pre>
+<p>It is possible to build-capture a project without performing static analysis by invoking <code>TsmartBuild.jar</code>. Let <code>path/to/project</code> be the path of the input project, build-capture can be performed by invoking the following commands in order:</p>
+<pre class="hljs"><code><div>&gt; <span class="hljs-built_in">cd</span> path/to/project
+&gt; ./configure
+&gt; java -jar TsmartBuild.jar -shell=/bin/bash make
+</div></code></pre>
+<p>Next, invoke the following command to perform static analysis on a build-captured project:</p>
+<pre class="hljs"><code><div>&gt; java -jar TsmartAnalyze.jar -captured=[CAPT_PATH] -cwe=[CWE_LIST] -task=[TASK_NO_LIST] (-output=[OUTPUT_PATH])
+</div></code></pre>
+<p>where <code>-captured</code> is the path of the build-captured project and should be in the form of <code>path/to/project/.process_makefile/</code>.</p>
+<h3 id="review-of-analysis-results">Review of Analysis Results</h3>
+<p>To review analysis results, the server for management of analysis results should be started first. This is because development members can examine the potential bugs individually by sharing analysis results. On the server side, enter the <code>bug_visualizer</code> directory and execute the following command:</p>
+<pre class="hljs"><code><div>python server.py ([port_number])
+</div></code></pre>
+<p>where <code>port_number</code> denotes the port number. If <code>port_number</code> is absent, port <code>8080</code> is employed by default.</p>
+<p>Let <code>[server_ip]</code> be the IP of the server side. Then execute the following command on the machine on which the static analysis is performed to upload analysis results along with the source files to the server.</p>
+<pre class="hljs"><code><div>python3 upload_sh.py --name=[task_name] --build=[build_path] --captured=[capture_path] --manual=[src_list] --xml=[xml_file] --server=[server_ip] --port=[port_number]
+</div></code></pre>
+<p>The requirement argument <code>--name</code> specifies a name for current analysis. Only one (and at least one) argument in <code>--build</code>, <code>-captured</code> and <code>--manual</code> is used and should be consistent with the corresponding argument in invoking <code>TsmartAnalyze.jar</code>. For example, if we use <code>--captured [CAPT_PATH]</code> in invoking <code>TsmartAnalyze.jar</code>, then <code>--captured [CAPT_PATH]</code> should be used in invoking <code>upload_sh.py</code> here. The argument <code>--xml</code> specifies the location of analysis result <code>.xml</code> file. If <code>-output</code> is unspecified in invoking <code>TsmartAnalyze.jar</code>, the location of analysis results is at <code>tsmart-v2/output/result.xml</code>; otherwise <code>result.xml</code> can be retrieved under <code>[OUTPUT_PATH]</code>. <code>--server</code> and <code>--port</code> specify the IP of server side and its port, respectively.</p>
+<p>If upload succeeds, <code>upload_sh.py</code> prints <code>上传成功</code> or <code>finished</code>.</p>
+<p>To view the analysis results, please visit <code>http://[server_ip]:[port_number]/visualizer.html</code> on a web browser. Note that the webpage of bug visualizer is tested on the latest version of Firefox and Chrome. Compatibility on other web browsers is not guaranteed. The webpage of bug visualizer is as follows.
+<img src="fig/visualizer_numbered.png" alt="Bug Visualizer"></p>
+<ol>
+<li>Select the name of analysis the results of which need to be viewed</li>
+<li>A file explorer</li>
+<li>A code viewer</li>
+<li>A search box. Users can enter a CWE identifier or a internal defect name to filter the detected potential bugs.</li>
+<li>A clickable CWE identifier. Once it is clicked, the panel under the bug list (No. 7) shows the details of the certain CWE identifier along with a link to its official definition webpage at https://cwe.mitre.org</li>
+<li>A bug list. Once a bug entry is clicked, counter trace panel (No. 8) shows the execution trace that trigger the certain bug.</li>
+<li>A CWE detail panel which shows the description of selected CWE identifier along with a link to the official definition webpage at https://cwe.mitre.org</li>
+<li>A counter trace panel. Once a concrete execution step is clicked, code viewer shows the contents of the relevant source file and goes to the code line corresponding to the selected execution step.</li>
+</ol>
+<h1 id="guide-for-configuration">Guide for Configuration</h1>
+<p>To adjust the analysis algorithm employed by Tsmart in a fine-grained manner, the underlying configuration files should be tweaked. Overall, Tsmart employs a 3-level configuration system.</p>
+<ol>
+<li><strong>Top Configuration</strong> specifies the referred phase configuration file, the scheduling type of phases, the type of error report, the function adapter class, library function aliases and stop functions.</li>
+<li><strong>Phase Configuration</strong> specifies (1) which phases are to be used, (2) referred algorithm configuration file for each phase, (3) the dependencies over the employed phases.</li>
+<li><strong>Algorithm Configuration</strong> specifies options for concrete static analysis algorithm.</li>
+</ol>
+<h2 id="top-configuration">Top Configuration</h2>
+<p>The following snippet shows an example of top configuration file:</p>
+<pre><code>phase.manager.config = top.range.config
+phase.manager.executionType = SEQUENTIAL
+
+statistics.kind = HIERARCHICAL
+error.export.mode = XML
+
+function.adapters = RangeFunctionAdapter
+function.RangeFunctionAdapter = map/alias.map
+function.stopFunctions = exit, abort, error, error_at_line
+</code></pre>
+<p><code>phase.manager.config</code> specifies the referred phase configuration file. <code>phase.manager.executionType</code> specifies the scheduling type for phases, and <code>SEQUENTIAL</code> means that phases are executed sequentially. In general, <code>statistics.kind</code> is set as <code>HIERARCHICAL</code> in order to support multi-entry analysis. <code>error.export.mode</code> should be set as <code>XML</code> in order to output <code>.xml</code> files correctly for displaying analysis results in bug visualizer. <code>function.adapter</code> specifies the library function support module while multiple modules are split by commas. <code>function.RangeFunctionAdapter</code> specifies the function name aliases (e.g. assume that library functions <code>f1</code> and <code>f2</code> have the identical operational semantics, then we only need to set <code>f2</code> as an alias of <code>f1</code> if the semantics of <code>f1</code> is implemented in an employed library function support module) for the library function support module named <code>RangeFunctionAdapter</code>. <code>function.stopFunctions</code> specifies a list of stop functions in use. A stop function refers to a function that never returns.</p>
+<h2 id="phase-configuration">Phase Configuration</h2>
+<p>The following snippet shows an example of a phase configuration file:</p>
+<pre><code>.SET
+DIR = org.sosy_lab.cpachecker.core.phase;
+.TES
+
+.DEF cfa
+.TYPE = $(DIR).CFACreatePhase
+parser.dialect = GNUC
+analysis.functionPointerCalls = false
+analysis.aggressivelyRemoveGlobals = true
+analysis.summaryEdges = true
+analysis.machineModel = LINUX64
+.FED
+
+.DEF summary
+.TYPE = $(DIR).SummaryComputationPhase
+base = config/product/
+summaries = access.properties, range.properties
+summary.usedExternalSummary = ACCESS_SUMMARY, RANGE_SUMMARY
+summary.usedInternalSummary = ACCESS_LOOP_INTERNAL, RANGE_LOOP_INTERNAL
+.FED
+
+.DEF basic
+.TYPE = $(DIR).BasicAnalysisPhase
+phase.analysis.type = MULTI_ENTRY
+phase.me.analysis = rangeAnalysis.properties
+phase.me.stopAfterError = false
+checker.weaknessForCheck = INTEGER_OVERFLOW, INTEGER_CONVERSION, DIVIDED_BY_ZERO
+.FED
+
+.RUN
+summary : cfa;
+basic : summary;
+</code></pre>
+<p>A phase configuration has three main sections. <code>.SET</code> section specifies aliases in use. Users can create more aliases analogously. The syntax for the usage of aliases is similar with that in <code>Makefile</code>. Each <code>.DEF</code> section corresponds to an analysis phase. <code>.TYPE</code> field specifies a name for the corresponding analysis phase and is required. The configurations inside a <code>.DEF</code> section are valid only for the enclosing phase. <code>.RUN</code> section describes the dependencies over the employed analysis phases. For example, <code>summary: cfa</code> denotes that the phase named <code>summary</code> depends on the results by the phase named <code>cfa</code>. The example phase configuration contains three phases: <code>cfa</code> (control-flow construction), <code>summary</code> (summary computation) and <code>basic</code> (concrete static analysis).</p>
+<p>The control-flow construction phase parses the input program. <code>parser.dialect</code> specifies the supported C extension. <code>analysis.functionPointerCalls</code> specifies whether function pointers are parsed and modelled in the control-flow graph at compile-time. <code>analysis.aggressivelyRemoveGlobals</code> specifies whether function definitions and global declarations unreachable from the current analysis entries are pruned in constructing control-flow graph. <code>analysis.machineModel</code> specifies the employed data model. <code>LINUX64</code> corresponds to LP64 where the byte lengths of <code>int</code>, <code>long</code> and pointer are 4, 8 and 8, respectively.</p>
+<p>In the summary computation phase, <code>base</code> is the root directory of configuration files for summary algorithms. <code>summaries</code> specifies the relative paths of summary configurations to be used. <code>summary.usedExternalSummary</code> and <code>summary.usedInternalSummary</code> specify the name of summaries to be used.</p>
+<p>In the concrete static analysis phase, <code>phase.analysis.type</code> specifies the type of analysis. In the most cases, the type of analysis is <code>MULTI_ENTRY</code> which denotes the analysis algorithm that starts from specified entry function(s) rather than the execution entry <code>main()</code>. <code>phase.me.analysis</code> specifies the configuration for the underlying concrete analysis algorithms. <code>phase.me.stopAfterError</code> specifies whether the analysis terminates once a potential defect is found. It is usually set to <code>true</code> for program verification tasks. <code>checker.weaknessForCheck</code> specifies the target defects (in their internal names) against which the input source code is checked. The supported defects can be referred to in <a href="#the-capability-of-tsmart">The Capability of Tsmart</a>. It is noteworthy that whether Tsmart checks the input code against the given target defect depends on the employed concrete analysis algorithm. For example, if <code>rangeAnalysis.properties</code> does not contain an analysis algorithm relevant to memory safety, Tsmart cannot find memory leak defects even if <code>MEMORY_LEAK</code> is specified in <code>checker.weaknessForCheck</code>.</p>
+<h2 id="analysis-configuration">Analysis Configuration</h2>
+<p>The following snippet shows the contents of <code>rangeAnalysis.properties</code>:</p>
+<pre><code>analysis.algorithm.bounded = true
+analysis.reachedSet.hierarchical = true
+analysis.useConfidence = true
+
+analysis.me.static.strategy = CHEAP_COVER
+
+cpa = cpa.arg.ARGCPA
+ARGCPA.cpa = cpa.composite.CompositeCPA
+CompositeCPA.cpas = cpa.location.LocationCPA, cpa.boundary.BoundaryCPA, cpa.range.RangeCPA, cpa.pointer2.PointerCPA
+
+cpa.boundary.callDepth = 2
+cpa.boundary.loopIteration = 1
+cpa.boundary.loopDepth = 3
+
+analysis.traversal.controlled.maxWaitingSize = 16
+analysis.traversal.useDominationOrder = true
+trace.upperBound = 1000
+
+analysis.traversal.order = BFS
+
+cfa.useMultiEdges = false
+
+solver.solver = Z3
+</code></pre>
+<p>The first two lines is necessary for multi-entry analysis. <code>analysis.useConfidence</code> is an experimental feature that prioritizes the detected bugs by their confidence scores. <code>analysis.me.static.strategy</code> specifies how the analysis entries are chosen, where <code>CHEAP_COVER</code> denotes a heuristic approach that derives analysis entries based on the structure of the input source code. Other available strategies for choosing analysis entries include <code>MAIN</code> (use <code>main()</code> as the only analysis entry), <code>FUNCTION_HEAD</code> (function-wise analysis). The following 3 lines specify the employed concrete analysis algorithms. <code>RangeCPA</code> is an analysis based on range abstract domain. <code>BoundaryCPA</code> is an analysis that captures information of call stack and loop stack in program execution. <code>PointerCPA</code> derives points-to information. The next 3 lines are the configurations relevant to boundary analysis where <code>callDepth</code>, <code>loopIteration</code> and <code>loopDepth</code> denote the maximum tracked depth of call stack, maximum tracked iterations of a loop and maximum tracked nesting loops. When the threshold is reached, the summary of relevant function or loop is applied. The remaining options serve as the fine-grained tweaks on precision-efficiency trade-off. For example, <code>trace.upperBound</code> specifies the upper bound of the branches to be tracked under a branching point in control-flow graph. At the last line, <code>solver.solver</code> specifies the underlying constraint solver.</p>
+<p>Details on more options used in configuration files can be found at <code>doc/ConfigurationOptions.txt</code> under the root directory of TsmartBD.</p>
+<h1 id="faq">FAQ</h1>
+<ol>
+<li><strong>Why some errors are encountered in viewing the analysis results, even when the analysis runs normally.</strong></li>
+</ol>
+<ul>
+<li>If multiple analyses are performed and they share the same output folder, the output results of the latest analysis are probably tainted by that of the previous analyses. Please make sure the output folder is empty before performing an analysis.</li>
+</ul>
+<ol start="2">
+<li><strong>I cannot find analysis results.</strong></li>
+</ol>
+<ul>
+<li>The analysis results are stored under <code>[OUTPUT_PATH]</code> specified in invoking <code>TsmartAnalyze.jar</code>. If <code>-output</code> argument is absent, the default location of analysis results is at <code>output/</code> under the root directory of TsmartBD.</li>
+</ul>
+<ol start="3">
+<li><strong><code>TsmartAnalyze.jar</code> prints the error message <code>Unrecognized CWE Number</code></strong></li>
+</ol>
+<ul>
+<li>For now, Tsmart supports 26 CWE types listed in <a href="#the-capability-of-tsmart">The Capability of Tsmart</a>. Please make sure that the specified CWE identifiers are supported by Tsmart. Also, you can mail to <a href="mailto:tsmart.project@gmail.com?subject=Demo%20Request">tsmart.project@gmail.com</a> to request support for a CWE identifier.</li>
+</ul>
+
+    </body>
+    </html>
