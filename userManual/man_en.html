@@ -62,7 +62,7 @@ ul.contains-task-list { padding-left: 0; } ul ul.contains-task-list { padding-le
 </ul>
 <h1 id="introduction">Introduction</h1>
 <h2 id="whats-tsmart">What's Tsmart</h2>
-<p>Tsmart is a static analyzer for C source code. Given a C program, Tsmart outputs a report which contains a list of potential defects and how they could be triggered in program execution.</p>
+<p>Tsmart is a static analyzer for C source code. Given a C program, Tsmart outputs a report which contains a list of potential defects and how they could be triggered in program execution. Currently the latest version of Tsmart is 2.0.</p>
 <p>Static analysis offers static compile-time techniques for predicting safe and computable approximations to the set of values or behaviors arising dynamically at runtime when executing a program. The main applications of static analysis include allowing compilers to generate more optimized code and reducing the likelihood of malicious or unintended behavior of programs.</p>
 <p>It is almost impossible to write a bug-free program. Although developers employ tests to validate the program functionality, there could still be a substantial number of potential defects which could only be manifested by corner inputs. Tsmart can be utilized to improve the quality of source code in the terms of reliability and security by finding bugs that reside deeply inside programs</p>
 <p>The overall schematic overview of Tsmart is shown as follows.</p>
@@ -139,7 +139,7 @@ ul.contains-task-list { padding-left: 0; } ul ul.contains-task-list { padding-le
 <dt>Scalability</dt>
 <dd>Tsmart finishes a completed analysis on <a href="https://www.wireshark.org/">Wireshark</a> 1.2.2 (~2.97MLOC) within 1.4 hours. The underlying hardware platform is a server with Intel(R) Xeon(R) E5-2603v3 CPU and 64GB memory.</dd>
 <dt>Supported Defects</dt>
-<dd>Tsmart currently supports 26 CWEs which generally cover the most fundamental and important program defects such as integer overflow, buffer overflow, null pointer dereference, resource leak and unreachable code. Details are listed as follows.</dd>
+<dd>Tsmart currently supports 26 CWEs which generally cover the most fundamental and important program defects such as integer overflow, buffer overflow, null pointer dereference, resource leak and unreachable code. Details are listed as follows. Note that Tsmart 2.0 is based on <a href="https://cwe.mitre.org/news/index.html#nov162017_CWE_Version_3.0_Now_Available">CWE version 3.0</a>.</dd>
 </dl>
 <table>
 <thead>

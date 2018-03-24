@@ -62,7 +62,7 @@ ul.contains-task-list { padding-left: 0; } ul ul.contains-task-list { padding-le
 </ul>
 <h1 id="%E7%AE%80%E4%BB%8B">简介</h1>
 <h2 id="%E4%BB%80%E4%B9%88%E6%98%AFtsmart">什么是Tsmart</h2>
-<p>Tsmart是一个分析代码缺陷的静态分析工具，可以用于C语言编写的程序源代码进行检测分析，从而给出一个缺陷分析报告。</p>
+<p>Tsmart是一个分析代码缺陷的静态分析工具，可以用于C语言编写的程序源代码进行检测分析，从而给出一个缺陷分析报告。当前最新版本为2.0。</p>
 <p>静态分析是指在不运行代码的方式下，通过语法分析、词法分析、控制流、数据流分析等技术对程序代码进行扫描，从而验证程序代码是否满足规范性、安全性、可靠性、可维护性等指标的一种代码分析技术。</p>
 <p>软件项目的编写过程中，有时候代码虽然能够通过编译器的编译和小规模的测试，但是其中仍然可能存在一些隐患。通过程序分析，在这些隐患产生影响之前将其修复，是一个非常具有实际意义的工作。用户可以通过使用Tsmart对编写的源代码进行分析，并且根据反馈报告对源代码进行修改。如此反复的迭代，就可以逐步消除软件项目中源代码的潜在缺陷，从而提高代码的准确性和稳定性。</p>
 <p>下图给出了一个Tsmart的实际使用场景：</p>
@@ -139,7 +139,7 @@ ul.contains-task-list { padding-left: 0; } ul ul.contains-task-list { padding-le
 <dt>缺陷检测效率</dt>
 <dd>Tsmart在配置为Intel(R) Xeon(R) E5-2603v3，64GB内存的服务器上能够在1.4小时内完成对<a href="https://www.wireshark.org/">Wireshark</a> 1.2.2的主编译目标的分析(包含约297万行有效C代码)</dd>
 <dt>支持缺陷类型</dt>
-<dd>Tsmart现支持26个CWE缺陷类型，总体上涵盖了数值运算缺陷、缓冲区溢出、指针缺陷、内存泄漏、不可达代码等几大类程序缺陷。具体见下表</dd>
+<dd>Tsmart现支持26个CWE缺陷类型，总体上涵盖了数值运算缺陷、缓冲区溢出、指针缺陷、内存泄漏、不可达代码等几大类程序缺陷，具体见下表。Tsmart 2.0基于<a href="https://cwe.mitre.org/news/index.html#nov162017_CWE_Version_3.0_Now_Available">CWE version 3.0</a>.</dd>
 </dl>
 <table>
 <thead>
