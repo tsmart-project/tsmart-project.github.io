@@ -20,7 +20,8 @@ ul.contains-task-list { padding-left: 0; } ul ul.contains-task-list { padding-le
         </style>
     </head>
     <body>
-        <ul>
+        <h1>Tsmart 2.0 User Manual</h1> 
+<ul>
 <li><a href="#introduction">Introduction</a>
 <ul>
 <li><a href="#whats-tsmart">What's Tsmart</a></li>
@@ -93,7 +94,7 @@ ul.contains-task-list { padding-left: 0; } ul ul.contains-task-list { padding-le
 <tr>
 <td>2</td>
 <td>Build-capture</td>
-<td>Build-capture replaces compilation commands in <code>Makefile</code> with the corresponding preprocessing commands and produces one or more analysis tasks, each of which consists of preprocessed source files and corresponds to a target in <code>Makefile</code>.</td>
+<td>Build-capture replaces compilation commands in <code>Makefile</code> with the corresponding preprocessing commands and produces one or more analysis tasks, each of which consists of pre-processed source files and corresponds to a target in <code>Makefile</code>.</td>
 </tr>
 <tr>
 <td>3</td>
@@ -530,8 +531,8 @@ ul.contains-task-list { padding-left: 0; } ul ul.contains-task-list { padding-le
 <tbody>
 <tr>
 <td><code>-build</code></td>
-<td><code>-build=[BUILD_PATH]</code></td>
-<td>Perform build-capture for the project under <code>[BUILD_PATH]</code></td>
+<td><code>-build=[BUILD_PATH] make</code></td>
+<td>Perform build-capture for the project under <code>[BUILD_PATH]</code> with <code>make</code></td>
 </tr>
 <tr>
 <td><code>-captured</code></td>
@@ -587,7 +588,10 @@ ul.contains-task-list { padding-left: 0; } ul ul.contains-task-list { padding-le
 </div></code></pre>
 <p><code>-manual</code> is required while <code>-output</code> is optional. If <code>-output</code> is not specified, the results are output to <code>output\</code> under the root location of TsmartBD module. Furthermore, users can specify multiple CWE identifiers split by commas in the <code>-cwe</code> argument. For example, <code>-cwe=190,369</code> makes Tsmart to check the defects of CWE 190 (integer overflow) and CWE 369 (division-by-zero). In fact, <code>-cwe</code> argument specifies preset configurations associated with CWE identifiers. If it is necessary to tweak analysis algorithm in a more fine-grained manner, users can specify a configuration file via <code>-config</code> argument.</p>
 <h3 id="compound-check">Compound Check</h3>
-<p>Perform static analysis on a C project based on <code>Makefile</code> compilation system. If the input C project has not been preprocessed, build-capture is necessary in prior to analysis. The output of build-capture is stored under <code>.process_makefile/</code> in the root directory of the input project. The command for compound check with build-capture is as follows.</p>
+<p>Perform static analysis on a C project based on <code>Makefile</code> compilation system. In some cases <code>Makefile</code> needs to be generated first, typically by invoking the following command in the root directory of the project.</p>
+<pre class="hljs"><code><div>&gt; ./configure
+</div></code></pre>
+<p>If the input C project has not been pre-processed, build-capture is necessary in prior to analysis. The output of build-capture is stored under <code>.process_makefile/</code> in the root directory of the input project. The command for compound check with build-capture is as follows.</p>
 <pre class="hljs"><code><div>&gt; java -jar TsmartAnalyze.jar -build=[BUILD_PATH] make -cwe=[CWE_LIST] -task=[TASK_NO_LIST] (-output=[OUTPUT_PATH])
 </div></code></pre>
 <p>The required argument <code>-build=[BUILD_PATH] make</code> denotes that using <code>make</code> to handle the <code>Makefile</code> in the project under <code>[BUILD_PATH]</code>. The <code>-task</code> argument is to specify the analysis task(s) to be analyzed and is optional. If the <code>-task</code> argument is absent, all the analysis tasks in the build-captured project are to be analyzed. Furthermore, the <code>-task</code> argument can be replaced with the <code>-taskName</code> argument which specifies the names of analysis tasks to be analyzed.</p>

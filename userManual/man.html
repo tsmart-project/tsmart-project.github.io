@@ -20,7 +20,8 @@ ul.contains-task-list { padding-left: 0; } ul ul.contains-task-list { padding-le
         </style>
     </head>
     <body>
-        <ul>
+        <h1>Tsmart 2.0用户手册</h1>
+<ul>
 <li><a href="#%E7%AE%80%E4%BB%8B">简介</a>
 <ul>
 <li><a href="#%E4%BB%80%E4%B9%88%E6%98%AFtsmart">什么是Tsmart</a></li>
@@ -531,8 +532,8 @@ ul.contains-task-list { padding-left: 0; } ul ul.contains-task-list { padding-le
 <tbody>
 <tr>
 <td><code>-build</code></td>
-<td><code>-build=[BUILD_PATH]</code></td>
-<td>对<code>[BUILD_PATH]</code>下的项目进行编译抓取</td>
+<td><code>-build=[BUILD_PATH] make</code></td>
+<td>对<code>[BUILD_PATH]</code>下的项目用<code>make</code>进行编译抓取</td>
 </tr>
 <tr>
 <td><code>-captured</code></td>
@@ -588,7 +589,10 @@ ul.contains-task-list { padding-left: 0; } ul ul.contains-task-list { padding-le
 </div></code></pre>
 <p>其中<code>-manual</code>是必要参数，若没有<code>-output</code>参数则分析结果输出到默认路径即TsmartBD的<code>output\</code>子目录下。此外，用户可以在<code>-cwe</code>参数中指定多个缺陷分类，用逗号分隔，例如<code>-cwe=190,369</code>表示对输入源代码文件的整数溢出缺陷(CWE 190)和除零缺陷(CWE 369)进行检测。<code>-cwe</code>选项事实上用来指定Tsmart的分析配置文件，当用户需要对分析算法作进一步定制时，可以用<code>-config</code>参数指定配置文件。</p>
 <h3 id="%E5%A4%8D%E5%90%88%E9%A1%B9%E7%9B%AE%E6%A3%80%E6%B5%8B">复合项目检测</h3>
-<p>针对基于<code>Makefile</code>编译环境的C语言项目进行缺陷检测。如果待测项目还没有被预处理，则应先进行编译抓取。编译抓取的结果保存在原项目路径下的<code>.process_makefile/</code>文件夹下。带编译抓取流程的分析执行如下命令：</p>
+<p>针对基于<code>Makefile</code>编译环境的C语言项目进行缺陷检测。一些情形下待测项目的<code>Makefile</code>需要首先被生成，比如在项目的根目录运行如下命令：</p>
+<pre class="hljs"><code><div>&gt; ./configure
+</div></code></pre>
+<p>如果待测项目还没有被预处理，则应先进行编译抓取。编译抓取的结果保存在原项目路径下的<code>.process_makefile/</code>文件夹下。带编译抓取流程的分析执行如下命令：</p>
 <pre class="hljs"><code><div>&gt; java -jar TsmartAnalyze.jar -build=[BUILD_PATH] make -cwe=[CWE_LIST] -task=[TASK_NO_LIST] (-output=[OUTPUT_PATH])
 </div></code></pre>
 <p>其中<code>-build=[BUILD_PATH] make</code>表示用<code>make</code>去处理<code>[BUILD_PATH]</code>所在项目的<code>Makefile</code>，是必须参数。<code>-task</code>参数是可选的，用户可以由此指定需要分析的任务编号，如果没有<code>-task</code>参数，那么默认地将分析编译抓取得到的所有分析任务。<code>-task</code>参数可以被<code>-taskName</code>参数替代，后者则需要指定待分析任务的名称（而非编号）。</p>
