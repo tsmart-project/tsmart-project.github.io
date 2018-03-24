@@ -155,174 +155,174 @@ ul.contains-task-list { padding-left: 0; } ul ul.contains-task-list { padding-le
 <tr>
 <td>1</td>
 <td><code>INTEGER_OVERFLOW</code></td>
-<td>190</td>
+<td><a href="https://cwe.mitre.org/data/definitions/190.html">190</a></td>
 <td>Integer Overflow or Wraparound</td>
 <td>整数运算的结果小于数学算术的期望值</td>
 </tr>
 <tr>
 <td>2</td>
 <td><code>INTEGER_UNDERFLOW</code></td>
-<td>191</td>
+<td><a href="https://cwe.mitre.org/data/definitions/191.html">191</a></td>
 <td>Integer Underflow (Wrap or Wraparound)</td>
 <td>整数运算的结果大于数学算术的期望值</td>
 </tr>
 <tr>
 <td>3</td>
 <td><code>UNEXPECTED_SIGN_EXT</code></td>
-<td>194</td>
+<td><a href="https://cwe.mitre.org/data/definitions/194.html">194</a></td>
 <td>Unexpected Sign Extension</td>
 <td>类型转换时整数的符号位被拓展导致转换结果与预期不一致</td>
 </tr>
 <tr>
 <td>4</td>
 <td><code>SIGNED_TO_UNSIGNED</code></td>
-<td>195</td>
+<td><a href="https://cwe.mitre.org/data/definitions/195.html">195</a></td>
 <td>Signed to Unsigned Conversion Error</td>
 <td>有符号整数转换到无符号整数产生非预期结果</td>
 </tr>
 <tr>
 <td>5</td>
 <td><code>UNSIGNED_TO_SIGNED</code></td>
-<td>196</td>
+<td><a href="https://cwe.mitre.org/data/definitions/196.html">196</a></td>
 <td>Unsigned to Signed Conversion Error</td>
 <td>无符号整数转换到有符号整数产生非预期结果</td>
 </tr>
 <tr>
 <td>6</td>
 <td><code>LOSSY_TRUNCATION</code></td>
-<td>197</td>
+<td><a href="https://cwe.mitre.org/data/definitions/197.html">197</a></td>
 <td>Numeric Truncation Error</td>
 <td>将整数值转换到较小的类型产生非预期的结果</td>
 </tr>
 <tr>
 <td>7</td>
 <td><code>DIV_ZERO</code></td>
-<td>369</td>
+<td><a href="https://cwe.mitre.org/data/definitions/369.html">369</a></td>
 <td>Divide By Zero</td>
 <td>除零错误</td>
 </tr>
 <tr>
 <td>8</td>
 <td><code>DEAD_CODE</code></td>
-<td>561</td>
+<td><a href="https://cwe.mitre.org/data/definitions/561.html">561</a></td>
 <td>Dead Code</td>
 <td>包含无法被执行到的代码</td>
 </tr>
 <tr>
 <td>9</td>
 <td><code>ALWAYS_TRUE</code></td>
-<td>571</td>
+<td><a href="https://cwe.mitre.org/data/definitions/571.html">571</a></td>
 <td>Expression is Always True</td>
 <td>表达式永真</td>
 </tr>
 <tr>
 <td>10</td>
 <td><code>ALWAYS_FALSE</code></td>
-<td>570</td>
+<td><a href="https://cwe.mitre.org/data/definitions/570.html">570</a></td>
 <td>Expression is Always False</td>
 <td>表达式永假</td>
 </tr>
 <tr>
 <td>11</td>
 <td><code>UNUSED_VARIABLE</code></td>
-<td>563</td>
+<td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td>
 <td>Assignment to Variable without Use</td>
 <td>对变量赋值，但从未用到该值</td>
 </tr>
 <tr>
 <td>12 <td rowspan=5><code>INVALID_FREE</code></td>
-<td>590</td>
+<td><a href="https://cwe.mitre.org/data/definitions/590.html">590</a></td>
 <td>Free of Memory not on the Heap</td>
 <td>对非堆上的内存对象调用<code>free()</code></td>
 <td></td>
 </tr>
 <tr>
 <td>13</td>
-<td>415</td>
+<td><a href="https://cwe.mitre.org/data/definitions/415.html">415</a></td>
 <td>Double Free</td>
 <td>对同一内存对象调用两次<code>free()</code></td>
 <td></td>
 </tr>
 <tr>
 <td>14</td>
-<td>761</td>
+<td><a href="https://cwe.mitre.org/data/definitions/761.html">761</a></td>
 <td>Free of Pointer not at Start of Buffer</td>
 <td>对指向非堆内存对象0偏移量的指针调用<code>free()</code></td>
 <td></td>
 </tr>
 <tr>
 <td>15</td>
-<td>690</td>
+<td><a href="https://cwe.mitre.org/data/definitions/690.html">690</a></td>
 <td>Unchecked Return Value to NULL Pointer Dereference</td>
 <td>没有可能为<code>NULL</code>的函数调用结果进行检查</td>
 <td></td>
 </tr>
 <tr>
 <td>16</td>
-<td>404</td>
+<td><a href="https://cwe.mitre.org/data/definitions/404.html">404</a></td>
 <td>Improper Resource Shutdown or Release</td>
 <td>对资源对象的不正确释放</td>
 <td></td>
 </tr>
 <tr>
 <td>17 <td rowspan=4><code>INVALID_READ</code></td>
-<td>476</td>
+<td><a href="https://cwe.mitre.org/data/definitions/476.html">476</a></td>
 <td>NULL Pointer Dereference</td>
 <td>空指针引用</td>
 <td></td>
 </tr>
 <tr>
 <td>18</td>
-<td>126</td>
+<td><a href="https://cwe.mitre.org/data/definitions/126.html">126</a></td>
 <td>Buffer Over-read</td>
 <td>缓冲区读取位置超过缓冲区上界</td>
 <td></td>
 </tr>
 <tr>
 <td>19</td>
-<td>127</td>
+<td><a href="https://cwe.mitre.org/data/definitions/127.html">127</a></td>
 <td>Buffer Under-read</td>
 <td>缓冲区读取位置未达到缓冲区下界</td>
 <td></td>
 </tr>
 <tr>
 <td>20</td>
-<td>416</td>
+<td><a href="https://cwe.mitre.org/data/definitions/416.html">416</a></td>
 <td>Use After Free</td>
 <td>读取被释放的堆内存对象</td>
 <td></td>
 </tr>
 <tr>
 <td>21 <td rowspan=3><code>INVALID_WRITE</code></td>
-<td>121</td>
+<td><a href="https://cwe.mitre.org/data/definitions/121.html">121</a></td>
 <td>Stack-based Buffer Overflow</td>
 <td>对超出栈内存对象上界的位置写入数据</td>
 <td></td>
 </tr>
 <tr>
 <td>22</td>
-<td>122</td>
+<td><a href="https://cwe.mitre.org/data/definitions/122.html">122</a></td>
 <td>Heap-based Buffer Overflow</td>
 <td>对超出堆内存对象上界的位置写入数据</td>
 <td></td>
 </tr>
 <tr>
 <td>23</td>
-<td>124</td>
+<td><a href="https://cwe.mitre.org/data/definitions/124.html">124</a></td>
 <td>Buffer Underwrite ('Buffer Underflow')</td>
 <td>对未达到内存对象下界的位置写入数据</td>
 <td></td>
 </tr>
 <tr>
 <td>24 <td rowspan=2><code>MEMORY_LEAK</code></td>
-<td>401</td>
+<td><a href="https://cwe.mitre.org/data/definitions/401.html">401</a></td>
 <td>Improper Release of Memory Before Removing Last Reference ('Memory Leak')</td>
 <td>堆内存泄露</td>
 <td></td>
 </tr>
 <tr>
 <td>25</td>
-<td>775</td>
+<td><a href="https://cwe.mitre.org/data/definitions/775.html">775</a></td>
 <td>Missing Release of File Descriptor or Handle after Effective Lifetime</td>
 <td>文件对象泄露</td>
 <td></td>
@@ -330,7 +330,7 @@ ul.contains-task-list { padding-left: 0; } ul ul.contains-task-list { padding-le
 <tr>
 <td>26</td>
 <td><code>STACK_ADDRESS_RETURN</code></td>
-<td>562</td>
+<td><a href="https://cwe.mitre.org/data/definitions/562.html">562</a></td>
 <td>Return of Stack Variable Address</td>
 <td>函数返回栈内存对象的地址</td>
 </tr>

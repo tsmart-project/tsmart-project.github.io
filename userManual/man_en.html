@@ -155,174 +155,174 @@ ul.contains-task-list { padding-left: 0; } ul ul.contains-task-list { padding-le
 <tr>
 <td>1</td>
 <td><code>INTEGER_OVERFLOW</code></td>
-<td>190</td>
+<td><a href="https://cwe.mitre.org/data/definitions/190.html">190</a></td>
 <td>Integer Overflow or Wraparound</td>
 <td>The software performs a calculation that can produce an integer overflow or wraparound, when the logic assumes that the resulting value will always be larger than the original value. This can introduce other weaknesses when the calculation is used for resource management or execution control.</td>
 </tr>
 <tr>
 <td>2</td>
 <td><code>INTEGER_UNDERFLOW</code></td>
-<td>191</td>
+<td><a href="https://cwe.mitre.org/data/definitions/191.html">191</a></td>
 <td>Integer Underflow (Wrap or Wraparound)</td>
 <td>The product subtracts one value from another, such that the result is less than the minimum allowable integer value, which produces a value that is not equal to the correct result.</td>
 </tr>
 <tr>
 <td>3</td>
 <td><code>UNEXPECTED_SIGN_EXT</code></td>
-<td>194</td>
+<td><a href="https://cwe.mitre.org/data/definitions/194.html">194</a></td>
 <td>Unexpected Sign Extension</td>
 <td>The software performs an operation on a number that causes it to be sign extended when it is transformed into a larger data type. When the original number is negative, this can produce unexpected values that lead to resultant weaknesses.</td>
 </tr>
 <tr>
 <td>4</td>
 <td><code>SIGNED_TO_UNSIGNED</code></td>
-<td>195</td>
+<td><a href="https://cwe.mitre.org/data/definitions/195.html">195</a></td>
 <td>Signed to Unsigned Conversion Error</td>
 <td>The software uses a signed primitive and performs a cast to an unsigned primitive, which can produce an unexpected value if the value of the signed primitive can not be represented using an unsigned primitive.</td>
 </tr>
 <tr>
 <td>5</td>
 <td><code>UNSIGNED_TO_SIGNED</code></td>
-<td>196</td>
+<td><a href="https://cwe.mitre.org/data/definitions/196.html">196</a></td>
 <td>Unsigned to Signed Conversion Error</td>
 <td>The software uses an unsigned primitive and performs a cast to a signed primitive, which can produce an unexpected value if the value of the unsigned primitive can not be represented using a signed primitive.</td>
 </tr>
 <tr>
 <td>6</td>
 <td><code>LOSSY_TRUNCATION</code></td>
-<td>197</td>
+<td><a href="https://cwe.mitre.org/data/definitions/197.html">197</a></td>
 <td>Numeric Truncation Error</td>
 <td>Truncation errors occur when a primitive is cast to a primitive of a smaller size and data is lost in the conversion.</td>
 </tr>
 <tr>
 <td>7</td>
 <td><code>DIV_ZERO</code></td>
-<td>369</td>
+<td><a href="https://cwe.mitre.org/data/definitions/369.html">369</a></td>
 <td>Divide By Zero</td>
 <td>The product divides a value by zero.</td>
 </tr>
 <tr>
 <td>8</td>
 <td><code>DEAD_CODE</code></td>
-<td>561</td>
+<td><a href="https://cwe.mitre.org/data/definitions/561.html">561</a></td>
 <td>Dead Code</td>
 <td>The software contains dead code, which can never be executed.</td>
 </tr>
 <tr>
 <td>9</td>
 <td><code>ALWAYS_TRUE</code></td>
-<td>571</td>
+<td><a href="https://cwe.mitre.org/data/definitions/571.html">571</a></td>
 <td>Expression is Always True</td>
 <td>The software contains an expression that will always evaluate to true.</td>
 </tr>
 <tr>
 <td>10</td>
 <td><code>ALWAYS_FALSE</code></td>
-<td>570</td>
+<td><a href="https://cwe.mitre.org/data/definitions/570.html">570</a></td>
 <td>Expression is Always False</td>
 <td>The software contains an expression that will always evaluate to false.</td>
 </tr>
 <tr>
 <td>11</td>
 <td><code>UNUSED_VARIABLE</code></td>
-<td>563</td>
+<td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td>
 <td>Assignment to Variable without Use</td>
 <td>The variable's value is assigned but never used, making it a dead store.</td>
 </tr>
 <tr>
 <td>12 <td rowspan=5><code>INVALID_FREE</code></td>
-<td>590</td>
+<td><a href="https://cwe.mitre.org/data/definitions/590.html">590</a></td>
 <td>Free of Memory not on the Heap</td>
 <td>The application calls <code>free()</code> on a pointer to memory that was not allocated using associated heap allocation functions such as <code>malloc()</code>, <code>calloc()</code>, or <code>realloc()</code>.</td>
 <td></td>
 </tr>
 <tr>
 <td>13</td>
-<td>415</td>
+<td><a href="https://cwe.mitre.org/data/definitions/415.html">415</a></td>
 <td>Double Free</td>
 <td>The product calls <code>free()</code> twice on the same memory address, potentially leading to modification of unexpected memory locations.</td>
 <td></td>
 </tr>
 <tr>
 <td>14</td>
-<td>761</td>
+<td><a href="https://cwe.mitre.org/data/definitions/761.html">761</a></td>
 <td>Free of Pointer not at Start of Buffer</td>
 <td>The application calls <code>free()</code> on a pointer to a memory resource that was allocated on the heap, but the pointer is not at the start of the buffer.</td>
 <td></td>
 </tr>
 <tr>
 <td>15</td>
-<td>690</td>
+<td><a href="https://cwe.mitre.org/data/definitions/690.html">690</a></td>
 <td>Unchecked Return Value to NULL Pointer Dereference</td>
 <td>The product does not check for an error after calling a function that can return with a NULL pointer if the function fails, which leads to a resultant NULL pointer dereference.</td>
 <td></td>
 </tr>
 <tr>
 <td>16</td>
-<td>404</td>
+<td><a href="https://cwe.mitre.org/data/definitions/404.html">404</a></td>
 <td>Improper Resource Shutdown or Release</td>
 <td>The program does not release or incorrectly releases a resource before it is made available for re-use.</td>
 <td></td>
 </tr>
 <tr>
 <td>17 <td rowspan=4><code>INVALID_READ</code></td>
-<td>476</td>
+<td><a href="https://cwe.mitre.org/data/definitions/476.html">476</a></td>
 <td>NULL Pointer Dereference</td>
 <td>A NULL pointer dereference occurs when the application dereferences a pointer that it expects to be valid, but is NULL, typically causing a crash or exit.</td>
 <td></td>
 </tr>
 <tr>
 <td>18</td>
-<td>126</td>
+<td><a href="https://cwe.mitre.org/data/definitions/126.html">126</a></td>
 <td>Buffer Over-read</td>
 <td>The software reads from a buffer using buffer access mechanisms such as indexes or pointers that reference memory locations after the targeted buffer.</td>
 <td></td>
 </tr>
 <tr>
 <td>19</td>
-<td>127</td>
+<td><a href="https://cwe.mitre.org/data/definitions/127.html">127</a></td>
 <td>Buffer Under-read</td>
 <td>The software reads from a buffer using buffer access mechanisms such as indexes or pointers that reference memory locations prior to the targeted buffer.</td>
 <td></td>
 </tr>
 <tr>
 <td>20</td>
-<td>416</td>
+<td><a href="https://cwe.mitre.org/data/definitions/416.html">416</a></td>
 <td>Use After Free</td>
 <td>Referencing memory after it has been freed can cause a program to crash, use unexpected values, or execute code.</td>
 <td></td>
 </tr>
 <tr>
 <td>21 <td rowspan=3><code>INVALID_WRITE</code></td>
-<td>121</td>
+<td><a href="https://cwe.mitre.org/data/definitions/121.html">121</a></td>
 <td>Stack-based Buffer Overflow</td>
 <td>A stack-based buffer overflow condition is a condition where the buffer being overwritten is allocated on the stack (i.e., is a local variable or, rarely, a parameter to a function).</td>
 <td></td>
 </tr>
 <tr>
 <td>22</td>
-<td>122</td>
+<td><a href="https://cwe.mitre.org/data/definitions/122.html">122</a></td>
 <td>Heap-based Buffer Overflow</td>
 <td>A heap overflow condition is a buffer overflow, where the buffer that can be overwritten is allocated in the heap portion of memory, generally meaning that the buffer was allocated using a routine such as <code>malloc()</code>.</td>
 <td></td>
 </tr>
 <tr>
 <td>23</td>
-<td>124</td>
+<td><a href="https://cwe.mitre.org/data/definitions/124.html">124</a></td>
 <td>Buffer Underwrite ('Buffer Underflow')</td>
 <td>The software writes to a buffer using an index or pointer that references a memory location prior to the beginning of the buffer.</td>
 <td></td>
 </tr>
 <tr>
 <td>24 <td rowspan=2><code>MEMORY_LEAK</code></td>
-<td>401</td>
+<td><a href="https://cwe.mitre.org/data/definitions/401.html">401</a></td>
 <td>Improper Release of Memory Before Removing Last Reference ('Memory Leak')</td>
 <td>The software does not sufficiently track and release allocated memory after it has been used, which slowly consumes remaining memory.</td>
 <td></td>
 </tr>
 <tr>
 <td>25</td>
-<td>775</td>
+<td><a href="https://cwe.mitre.org/data/definitions/775.html">775</a></td>
 <td>Missing Release of File Descriptor or Handle after Effective Lifetime</td>
 <td>The software does not release a file descriptor or handle after its effective lifetime has ended, i.e., after the file descriptor/handle is no longer needed.</td>
 <td></td>
@@ -330,7 +330,7 @@ ul.contains-task-list { padding-left: 0; } ul ul.contains-task-list { padding-le
 <tr>
 <td>26</td>
 <td><code>STACK_ADDRESS_RETURN</code></td>
-<td>562</td>
+<td><a href="https://cwe.mitre.org/data/definitions/562.html">562</a></td>
 <td>Return of Stack Variable Address</td>
 <td>A function returns the address of a stack variable, which will cause unintended program behavior, typically in the form of a crash.</td>
 </tr>
