@@ -100,11 +100,11 @@
         <div class="container-fluid">
             <div class="navbar-header">
                 <a class="nav-title" href="#">Tsmart</a>&nbsp;&nbsp;&nbsp;
-                <a class="nav-item" href="#">当前版本：2.0 (2017年12月16日)</a>
+                <a class="nav-item" href="#">Version：2.0 (Dec 16, 2017)</a>
             </div>
             <div>
                 <ul class="nav navbar-nav navbar-right ">
-                    <li ><a href="mailto:tsmart.project@gmail.com" class="nav-item " data-toggle="modal" data-target="#myModal">联系我们</a></li>
+                    <li ><a href="mailto:tsmart.project@gmail.com" class="nav-item " data-toggle="modal" data-target="#myModal">Contact Us</a></li>
                     <li ><a href="userManual/man.html" class="nav-item" target="_blank">用户手册</a></li>
                     <li ><a href="userManual/man_en.html" class="nav-item" target="_blank">User Manual</a></li>
                 </ul>
@@ -117,11 +117,11 @@
             <div class="modal-content">
                 <div class="modal-body">
                     <p class="modal-message">
-                        请邮件<a style="color:mediumorchid" href="mailto:tsmart.project@gmail.com?subject=Demo%20Request">tsmart.project@gmail.com</a>获取工具的试用版本。
+                        Please contact <a style="color:mediumorchid" href="mailto:tsmart.project@gmail.com?subject=Demo%20Request">tsmart.project@gmail.com</a> for an evaluation copy of Tsmart 2.0.
                     </p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">确定
+                    <button type="button" class="btn btn-default" data-dismiss="modal">OK
                     </button>
                 </div>
             </div>
@@ -133,64 +133,67 @@
     <div class="main-block" style="background-color:rgb(85, 141, 198)">    
         <div class="main-message">
             <p class="main-message-title">
-                C源代码静态分析工具
+                Static Analyzer for C Source Code
             </p>
             <p class="main-message-outline">
-                支持整数溢出、缓冲区溢出、空指针引用等代码质量缺陷和安全漏洞<sup>1</sup>
+                Supporting various kinds of vulnerabilities such as integer overflow, buffer overflow and null pointer dereferences.<sup>1</sup>
             </p>
             <p class="main-message-outline">
-                支持分析算法按需配置，灵活调节精度与效率的平衡
+                Supporting fine-grained adjustment on precision-efficiency trade-off by configuration.
             </p>
             <p class="main-message-outline">
-                支持单文件、多文件以及多种编译环境
+                Supporting a single source file, multiple source files and various compilation environments.
             </p>
             <p class="main-message-outline">
-                分析结果可定位、可跟踪、可管理
+                Friendly user interface for locating, tracing and managing analysis results.
             </p>
             <p class="main-message-outline">
-                全面兼容CWE，缺陷的分类和展示严格遵循CWE兼容性规范
+                A CWE-compatible tool.<sup>2</sup>
             </p>
         </div>
         <br>
         <div class="comment">
-            1. Tsmart支持的缺陷类型详见<a href="userManual/man.html">用户手册</a>
+            1. Supported defects can be referred in <a href="userManual/man.html">User Manual</a>
+        </div>
+        <div class="comment">
+            2. For more information on CWE-compatibility, please visit <a href="https://cwe.mitre.org/compatible/index.html">CWE Compatibility Home</a>.
         </div>
     </div>
     <div class="main-block" style="background-color: rgb(55, 112, 168)">
         <div class="main-message">
             <p class="main-message-title">
-                精度和效率，缺一不可
+                Precise, and Efficient
             </p>
             <p class="main-message-outline">
-                在Juliet Test Suite上，总体误报率0.6%，漏报率0.6%<sup>2</sup>
+                On the Juliet Test Suite, the overall false-positive rate is 0.6%, and the overall false-negative rate is 0.6%<sup>3</sup>
             </p>
             <p class="main-message-outline">
-                在297万行代码的开源软件Wireshark上，总分析时间仅为1.4小时<sup>3</sup>
+                The overall time cost on analyzing Wireshark project which has more than 2.97 MLOC is approximately 1.4 hours.<sup>4</sup>
             </p>
         </div>
         <br>
             <div class="comment">
-                2. 实验基于Juliet Test Suite中25个CWE分类下的共14793个测试程序，机器配置为Intel Core i7-4790K，32GB内存，操作系统为Ubuntu 16.04LTS
+                3. The Juliet Test Suite is available at <a href="https://samate.nist.gov/SRD/testsuite.php#standalone">here</a>.The experiment focuses on 25 supported CWE categories which contain a total of 14793 test programs. The machine that runs the experiment is equipped with Intel Core i7-4790K and 32 GB memory, while running Ubuntu 16.04 LTS.
             </div>
             <div class="comment">
-                3. 实验基于<a href="https://www.wireshark.org">Wireshark</a> 2.2.1，机器配置为Intel Xeon E5-2603v3，64GB内存，操作系统为Ubuntu 16.04LTS
+                4. The experiment analyzes <a href="https://www.wireshark.org">Wireshark</a> 2.2.1. The machine that runs the experiment is equipped with Intel Xeon E5-2603v3 and 64 GB memory, while running Ubuntu 16.04 LTS.
             </div>
         </div>
     <div class="main-block" style="background-color: rgb(49, 98, 147)">
         <div class="main-message">
             <p class="main-message-title">
-                联系我们
+                Contact Us
             </p>
             <p class="main-message-outline">
-                请<a style="color:palegreen" href="mailto:tsmart.project@gmail.com?subject=Demo%20Request">邮件</a>获取工具的试用版本
+                Please <a style="color:palegreen" href="mailto:tsmart.project@gmail.com?subject=Demo%20Request">mail to us</a> for an evaluation copy
             </p>
             <p class="main-message-outline">
-                请<a style="color:palegreen" href="mailto:tsmart.project@gmail.com?subject=Technical%20Support">邮件</a>请求技术支持
+                Please <a style="color:palegreen" href="mailto:tsmart.project@gmail.com?subject=Technical%20Support">mail to us</a> for a technical support
             </p>
         </div>
         <br><br><br>
         <div class="comment">
-            Copyright©2018 清华大学软件学院软件系统与工程研究所
+            Copyright©2018 Institute of Software System and Engineering, School of Software, Tsinghua University
         </div>
     </div>
     
